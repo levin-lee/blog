@@ -57,6 +57,12 @@
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 	        
+				<li><a href="/photo/">相册</a></li>
+	        
+				<li><a href="/about/">个人简介</a></li>
+	        
+				<li><a href="/machine_learning/">机器学习</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -83,7 +89,7 @@
 		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/liu-xiao-hong-16" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 			</div>
 		</nav>
@@ -113,6 +119,12 @@
 			
 				
 			
+				
+			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -124,18 +136,24 @@
 			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/liu-xiao-hong-16" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 20%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+					<li style="width: 20%"><a href="/photo/">相册</a></li>
+		        
+					<li style="width: 20%"><a href="/about/">个人简介</a></li>
+		        
+					<li style="width: 20%"><a href="/machine_learning/">机器学习</a></li>
 		        
 				</ul>
 			</nav>
@@ -172,7 +190,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1、迁移率。"><a href="#1、迁移率。" class="headerlink" title="1、迁移率。"></a>1、迁移率。</h1><p>迁移率侧重于分析客户状态的发展变化路径，如M0-M1，M1-M2，M2-M3等。</p>
+        <h2 id="1、迁移率。"><a href="#1、迁移率。" class="headerlink" title="1、迁移率。"></a>1、迁移率。</h2><p>迁移率侧重于分析客户状态的发展变化路径，如M0-M1，M1-M2，M2-M3等。</p>
 <p>具体含义：</p>
 <ul>
 <li>M0：没有逾期；</li>
@@ -184,20 +202,18 @@
 <li>M6：表示逾期151-180天；</li>
 <li>M6+：表示逾期180天以上。<br>迁移率模型：是一种来预测未来坏账损失的方法，它通过对历史数据中处于某一拖欠位置的账户贷款余额每月拖欠变化情况的分析，来预测当期不同拖欠周期的未来坏账损失</li>
 </ul>
-<h1 id="2、滚动率"><a href="#2、滚动率" class="headerlink" title="2、滚动率"></a>2、滚动率</h1><p>滚动率分析可以对客户好坏程度进行定义。<br>滚动率分析就是从某个观察点之前的一段时间(称为观察期)的最坏的状态向观察点之后的一段时间(称为表现期)的最坏状态的发展变化情况<br> 在风险控制中，我们的根本目的是识别坏用户，通过历史数据，抓取坏客户显著区别于正常客户的特征，并以此为标准去预测未来的坏客户。用户的好坏其实很难定义，不能说逾过期的用户就是坏用户，也许人家其实想还，只是不小心忘记还款了呢。而且，有的时候，“适当”的逾期还能增加公司的逾期利息收入。我们所关注的坏客户是坏到某一程度，也就是逾期等级较高且不还款的客户。</p>
-<pre><code>前面说的vintage是从时间维度上判断客户群体的好坏，下面说的滚动率则是从行为程度上判断客户的好坏，它可以帮助我们判断某些逾期客户是否还可以再抢救一下，收回点成本。
-
-滚动率，简单地说就是以某一时间点为观察节点，观察客户在该点前一段时间内（比如半年）最坏逾期阶段，并追踪其在观察点之后的一段时间向其他逾期阶段发展的情况，特别是向更坏程度发展的情况。举个栗子，今天是2018年5月25日，取今天的1万个客户，统计他们在过去半年里的最大逾期阶段。然后追踪他们后半年的表现。以下数字纯属虚构，完全是为了说明问题，各个公司有自己的观察数据和追踪数据。
-
-M0的客户在未来半年里，98%的客户还是会保持正常M0的状态
+<h2 id="2、滚动率"><a href="#2、滚动率" class="headerlink" title="2、滚动率"></a>2、滚动率</h2><p>滚动率分析可以对客户好坏程度进行定义。<br>滚动率分析就是从某个观察点之前的一段时间(称为观察期)的最坏的状态向观察点之后的一段时间(称为表现期)的最坏状态的发展变化情况<br> 在风险控制中，我们的根本目的是识别坏用户，通过历史数据，抓取坏客户显著区别于正常客户的特征，并以此为标准去预测未来的坏客户。用户的好坏其实很难定义，不能说逾过期的用户就是坏用户，也许人家其实想还，只是不小心忘记还款了呢。而且，有的时候，“适当”的逾期还能增加公司的逾期利息收入。我们所关注的坏客户是坏到某一程度，也就是逾期等级较高且不还款的客户。</p>
+<p>前面说的vintage是从时间维度上判断客户群体的好坏，下面说的滚动率则是从行为程度上判断客户的好坏，它可以帮助我们判断某些逾期客户是否还可以再抢救一下，收回点成本。</p>
+<p>滚动率，简单地说就是以某一时间点为观察节点，观察客户在该点前一段时间内（比如半年）最坏逾期阶段，并追踪其在观察点之后的一段时间向其他逾期阶段发展的情况，特别是向更坏程度发展的情况。举个栗子，今天是2018年5月25日，取今天的1万个客户，统计他们在过去半年里的最大逾期阶段。然后追踪他们后半年的表现。以下数字纯属虚构，完全是为了说明问题，各个公司有自己的观察数据和追踪数据。</p>
+<pre><code>M0的客户在未来半年里，98%的客户还是会保持正常M0的状态
 最大逾期阶段M1的客户在未来80%会变M0，但是还有20%会继续，甚至有5%的人往更坏的程度发展
 最大逾期阶段M2的客户在未来40%的人会继续恶化，22%左右的人会变M0（完全从良）；
 最大逾期阶段M3的客户在未来60%的人会继续恶化，15%左右的人会变M0（完全从良）；
 最大逾期阶段M3+的客户在未来80%的客户会继续此状态（没救了）。
 
-根据以上的数据，我们可能就可以得出逾期3期以上的客户，都是无力抢救的坏客户这样的结论。假如我们想把条件收紧一点，那么我们可能会选择逾3期或者2期。再假如我要给坏设定等级，那么我就可以把3期以上设为极度坏，逾3、2期的话可能设置为中度坏，逾1期的人可以是不经意的坏。这些特征将来可以放到风控建模的样本特征中来。</code></pre><h1 id="3、A卡"><a href="#3、A卡" class="headerlink" title="3、A卡"></a>3、A卡</h1><p>申请：用户会提交相关材料进行审核。这里会使用A卡！A（Application）+配套策略决定是否会放款！<br>A卡（Application score card）申请评分卡<br>贷前！</p>
-<h1 id="4、B卡"><a href="#4、B卡" class="headerlink" title="4、B卡"></a>4、B卡</h1><p>放款：贷中使用B（Behavior）卡及策略。<br>B卡（Behavior score card）行为评分卡<br>贷中！</p>
-<h1 id="5、C卡"><a href="#5、C卡" class="headerlink" title="5、C卡"></a>5、C卡</h1><p>提醒催收：C（Collection）卡！结果：用户还款或者不还款！<br>C卡（Collection score card）催收评分卡<br>贷后！</p>
+根据以上的数据，我们可能就可以得出逾期3期以上的客户，都是无力抢救的坏客户这样的结论。假如我们想把条件收紧一点，那么我们可能会选择逾3期或者2期。再假如我要给坏设定等级，那么我就可以把3期以上设为极度坏，逾3、2期的话可能设置为中度坏，逾1期的人可以是不经意的坏。这些特征将来可以放到风控建模的样本特征中来。</code></pre><h2 id="3、A卡"><a href="#3、A卡" class="headerlink" title="3、A卡"></a>3、A卡</h2><p>申请：用户会提交相关材料进行审核。这里会使用A卡！A（Application）+配套策略决定是否会放款！<br>A卡（Application score card）申请评分卡<br>贷前！</p>
+<h2 id="4、B卡"><a href="#4、B卡" class="headerlink" title="4、B卡"></a>4、B卡</h2><p>放款：贷中使用B（Behavior）卡及策略。<br>B卡（Behavior score card）行为评分卡<br>贷中！</p>
+<h2 id="5、C卡"><a href="#5、C卡" class="headerlink" title="5、C卡"></a>5、C卡</h2><p>提醒催收：C（Collection）卡！结果：用户还款或者不还款！<br>C卡（Collection score card）催收评分卡<br>贷后！</p>
 
       
 
@@ -587,7 +603,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">本科毕业于上海大学-自动化专业&lt;br&gt;&lt;br&gt;研究生毕业于厦门大学-应用统计专业&lt;br&gt;&lt;br&gt;目前在北京工作,&lt;br&gt;&lt;br&gt;最喜欢的一本书：《平凡的世界》&lt;br&gt;</div>
   	  	
     	</section>
     

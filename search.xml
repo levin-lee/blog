@@ -7,6 +7,7 @@
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<a id="more"></a>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
@@ -17,6 +18,9 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>Hello World</category>
+      </categories>
       <tags>
         <tag>hello</tag>
       </tags>
@@ -30,7 +34,7 @@
 shutdown now ← 立刻关机；
 shutdown +5 ← 5 分钟后关机；
 shutdown 10:30 ← 在 10：30 时关机；</code></pre>  －r 参数设置关机后重新启动<pre><code>shutdown -r now ← 立刻关闭系统并重启；
-shutdown -r 23:59 ← 指定在 23：59 时重启动；</code></pre></li>
+shutdown -r 23:59 ← 指定在 23：59 时重启动；</code></pre><a id="more"></a></li>
 <li>3、重新启动计算机的 reboot 命令：<br>   -f 参数：不依正常的程序运行关机，直接关闭系统并重新启动计算机；<br>   -I 参数：在在重新启动之前关闭所有网络接口；<br>   虽然 reboot 命令有个参数可以使用，但是一般只需要单独运行 reboot 命令就可以了<h2 id="二，文件与目录的操作"><a href="#二，文件与目录的操作" class="headerlink" title="二，文件与目录的操作"></a>二，文件与目录的操作</h2></li>
 <li>1、列出文件列表的 ls 命令<br>  ls：显示当前目录的内容；<br>  ls –a： 当运行 ls 命令时，并不会显示名称以“.”开头的文件。因此可加上“-a”参数指<br>定要列出这些文件；<br>  ls –s –S：以“-s”参数显示每个文件所有的空间，并以“-S”参数指定按所有占用空间的大<br>小排序；<br>  ls –l/usr/games：在 ls 命令后直接加上欲显示的目录路径，就会列出该目录的内容；</li>
 <li>2、切换目录的 cd 命令<br>   cd tony ← 切换到当前目录下的 tony 子目录；<br>   cd .. ← 切换到上一层目录；<br>   cd / ← 切换到系统根目录；<br>   cd /usr/bin ← 切换到/usr/bin 目；</li>
@@ -108,6 +112,9 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 网址：bjyz-holmes-0014.bjyz.baidu.com:8111</code></pre>查找字符：<pre><code>grep “string” yuqi.csv  * -n --color</code></pre></li>
 </ul>
 ]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
       <tags>
         <tag>Linux</tag>
       </tags>
@@ -140,6 +147,9 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <h2 id="4、B卡"><a href="#4、B卡" class="headerlink" title="4、B卡"></a>4、B卡</h2><p>放款：贷中使用B（Behavior）卡及策略。<br>B卡（Behavior score card）行为评分卡<br>贷中！</p>
 <h2 id="5、C卡"><a href="#5、C卡" class="headerlink" title="5、C卡"></a>5、C卡</h2><p>提醒催收：C（Collection）卡！结果：用户还款或者不还款！<br>C卡（Collection score card）催收评分卡<br>贷后！</p>
 ]]></content>
+      <categories>
+        <category>风控</category>
+      </categories>
       <tags>
         <tag>风控</tag>
       </tags>
@@ -156,6 +166,9 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 
 <h2 id="基于存在的git仓库新建项目"><a href="#基于存在的git仓库新建项目" class="headerlink" title="基于存在的git仓库新建项目"></a>基于存在的git仓库新建项目</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd existing_repo</span><br><span class="line">git remote rename origin old-origin</span><br><span class="line">git remote add origin ssh:&#x2F;&#x2F;git@gitlab.duxiaoman-int.com:8022&#x2F;lelingshan01_dxm&#x2F;demo2.git</span><br><span class="line">git push -u origin --all git push -u origin --tags</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>gitlab</category>
+      </categories>
       <tags>
         <tag>gitlab</tag>
       </tags>

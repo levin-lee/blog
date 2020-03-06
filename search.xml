@@ -4,10 +4,8 @@
     <title>机器学习-转</title>
     <url>/2020/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%BD%AC/</url>
     <content><![CDATA[<p>机器学习是计算机科学的一个子领域，在人工智能领域，机器学习逐渐发展成模式识别和计算科学理论的研究。从2016年起，机器学习到达了不合理的火热巅峰。但是，有效的机器学习是困难的，因为机器学习本身就是一个交叉学科，没有科学的方法及一定的积累很难入门。</p>
-<p>如果你也想学习机器学习或者正在学习机器学习，本手册一定会帮助你走向你自己的“人生巅峰”。手册包含如何入门机器学习，机器学习流行算法，机器学习实战等等。</p>
 <a id="more"></a>
-<p>一．机器学习入门篇：</p>
-<p>1．<a href="https://yq.aliyun.com/articles/67218?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">让你少走弯路：这有一份开展机器学习的简短指南</a></p>
+<h2 id="一．机器学习入门篇："><a href="#一．机器学习入门篇：" class="headerlink" title="一．机器学习入门篇："></a>一．机器学习入门篇：</h2><p>1．<a href="https://yq.aliyun.com/articles/67218?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">让你少走弯路：这有一份开展机器学习的简短指南</a></p>
 <p>摘要：本文分享了一份简单的关于开展机器学习的心得体会，目的是给初学者提供基本的指导，主要讲解了建立系统、选择合适的评价指标、数据处理、系统优化等内容，帮助初学者少走一些弯路。</p>
 <ol start="2">
 <li><a href="https://yq.aliyun.com/articles/204352?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习的入门“秘籍”</a></li>
@@ -18,20 +16,20 @@
 </ol>
 <p>摘要：小白也能看懂机器学习？这篇文章用超级玛丽的原理教会你，到底什么是机器学习，让尖端科技不再艰深难懂。</p>
 <ol start="4">
-<li>[机器学习能为你的业务做什么？有些事情你肯定猜不到！（机器学习入门第一篇](<a href="https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）" target="_blank" rel="noopener">https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）</a></li>
+<li>[机器学习能为你的业务做什么？有些事情你肯定猜不到！第一篇](<a href="https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）" target="_blank" rel="noopener">https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）</a></li>
 </ol>
 <p>摘要：机器学习是一项令人难以置信的技术，你需要了解很多很多的基础知识，以使得业务功能尽可能的不受复杂算法的影响，让你能够提出正确的问题、了解机器学习模型开发过程、成立一个团队以促进学科间的不断合作，而不是把数据科学视为一个产生奇迹的黑匣子。</p>
 <ol start="5">
-<li><a href="https://yq.aliyun.com/articles/169190?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于机器学习算法 你需要了解的东西（机器学习入门第二篇)</a></li>
+<li><a href="https://yq.aliyun.com/articles/169190?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于机器学习算法 你需要了解的东西 第二篇</a></li>
 </ol>
 <p>摘要：对学习算法进行分类是基于构建模型时所需的数据：数据是否需要包括输入和输出或仅仅是输入，需要多少个数据点以及何时收集数据。根据上述分类原则，可以分为4个主要的类别：监督学习、无监督学习、半监督学习和强化学习。</p>
 <ol start="6">
-<li><a href="https://yq.aliyun.com/articles/174724?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何开发机器学习模型？（机器学习入门第三篇）</a></li>
+<li><a href="https://yq.aliyun.com/articles/174724?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何开发机器学习模型？第三篇</a></li>
 </ol>
 <p>摘要：创建一个优秀的机器学习模型跟创建其他产品是一样的：首先从构思开始，把要解决的问题和一些潜在的解决方案放在一起考虑。一旦有了明确的方向，就可以对解决方案进行原型化，然后对它进行测试以确定是否满足需求，不妨看看本文是如何一步一步实现的。</p>
-<p>7.<a href="https://yq.aliyun.com/articles/175707?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何高效运作机器学习团队（机器学习入门第四篇）</a></p>
+<p>7.<a href="https://yq.aliyun.com/articles/175707?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何高效运作机器学习团队第四篇</a></p>
 <p>摘要: 一个“传统”的产品团队由设计师、工程师和产品经理组成，而数据分析师有时也会包含在其中，但大多数情况下是多个团队共享这个稀缺资源。在机器学习团队中又会有哪些角色和组织结构呢，本文为你揭晓。</p>
-<p>8.<a href="https://yq.aliyun.com/articles/178357?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习会产生哪些用户体验问题？（机器学习入门第五篇）</a></p>
+<p>8.<a href="https://yq.aliyun.com/articles/178357?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习会产生哪些用户体验问题？第五篇</a></p>
 <p>摘要：许多机器学习算法都是黑匣子：输入大量的数据，然后获得一个以某种神秘方式工作的模型。这使得很难向用户解释机器学习的结果。在许多算法中，还存在着交互效应，这使得模型更加难以解释了。你可以把这个看成是特征之间的复合效应，特征之间以多种奇怪而又复杂并且不为人类所理解的方式结合在一起，整体效应大于各个部分效应。</p>
 <ol start="9">
 <li><a href="https://yq.aliyun.com/articles/67165?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——引言 (Part I)</a></li>
@@ -69,8 +67,7 @@
 <li><a href="https://yq.aliyun.com/articles/222434?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习快速入门：你必须知道的三大算法</a></li>
 </ol>
 <p>摘要：每天霸占新闻头条的“机器学习”，想入门，先看懂这三大算法。</p>
-<p>二．机器学习算法篇：</p>
-<p>1.<a href="https://yq.aliyun.com/articles/86632?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">快速选择合适的机器学习算法</a></p>
+<h2 id="二．机器学习算法篇："><a href="#二．机器学习算法篇：" class="headerlink" title="二．机器学习算法篇："></a>二．机器学习算法篇：</h2><p>1.<a href="https://yq.aliyun.com/articles/86632?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">快速选择合适的机器学习算法</a></p>
 <p>摘要：机器学习初学者可以通过本文了解如何快速找到合适的机器学习算法。</p>
 <p>2.<a href="https://yq.aliyun.com/articles/64245?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">多重角度解读：贝叶斯推理是怎么工作的</a></p>
 <p>摘要：本文首先介绍了贝叶斯的起源，并利用简单的例子生动形象地讲解了贝叶斯定理是如何工作的，解释了其基本原理以及公式的物理含义。</p>
@@ -106,8 +103,7 @@
 <p>摘要: 本文介绍t-SNE聚类算法，分析其基本原理。并从精度上与PCA等其它降维算法进行比较分析，结果表明t-SNE算法更优越，本文最后给出了R、Python实现的示例以及常见问题。t-SNE算法用于自然语音处理、图像处理等领域很有研究前景。</p>
 <p><a href="https://yq.aliyun.com/articles/216164?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">18.随机森林 VS 梯度提升机——模型融合之我见</a></p>
 <p>摘要：本文节选自Quora社区上“When would one use Random Forests over Gradient Boosted Machines (GBMs)?”问题的回答，几位博主就随机森林(Random Forests)与梯度提升机(Gradient Boosted Machines, GBMs)的适合场景以及优缺点展开了讨论。</p>
-<p>三．机器学习常用库：</p>
-<p><a href="https://yq.aliyun.com/articles/69330?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">1.倚天遇到屠龙：LightGBM VS xgboost谁才是最强的梯度提升库？</a></p>
+<h2 id="三．机器学习常用库："><a href="#三．机器学习常用库：" class="headerlink" title="三．机器学习常用库："></a>三．机器学习常用库：</h2><p><a href="https://yq.aliyun.com/articles/69330?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">1.倚天遇到屠龙：LightGBM VS xgboost谁才是最强的梯度提升库？</a></p>
 <p>摘要：很多人把XGBoost比作屠龙刀，LightGBM比作倚天剑，那么当倚天遇到屠龙，谁更强呢？</p>
 <p><a href="https://yq.aliyun.com/articles/81469?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">2.即学即用：Pandas入门与时间序列分析</a></p>
 <p>摘要：这篇文章是Alexander Hendorf 在PyData Florence 2017上做的报告。报告前半部分主要为初学者介绍Pandas的基本功能，如数据输入/输出、可视化、聚合与选择与访问，后半部分主要介绍如何使用Pandas进行时间序列分析，源代码亲测可用。</p>
@@ -125,8 +121,7 @@
 <p>摘要：我们一直使用Pandas，但是却不知道关于Pandas的细节。Pandas开发者深度复盘Pandas，指出了十大关键性问题，并通过介绍了如何使用Apache Arrow来解决这些问题。</p>
 <p><a href="https://yq.aliyun.com/articles/222523?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">9. 关于Numba你可能不了解的七个方面</a></p>
 <p>摘要：目前Numba正被开始流行使用来加速Python程序，本文讲解了七个大家可能不了解的方面，希望对大家有所帮助。</p>
-<p>四．机器学习实战篇：</p>
-<p>1.57行价值八千万美元的车牌识别代码</p>
+<h2 id="四．机器学习实战篇："><a href="#四．机器学习实战篇：" class="headerlink" title="四．机器学习实战篇："></a>四．机器学习实战篇：</h2><p>1.57行价值八千万美元的车牌识别代码</p>
 <p>摘要：为了防止被窃车辆进入黑市销售，警方使用了一个名为VicRoads的基于网络的服务，该服务用于检查车辆的登记状态。该警局还投资研发了一个固定式汽车牌照扫描器：一个固定的三脚架摄像头，可扫描过往的车辆，并自动识别被窃车辆。</p>
 <p>2.如何利用机器学习预测房价？</p>
 <p>摘要：本文作者利用自己过去三个月里所学到的东西，来预测所在城市的房价。所用到的技术有网络爬取技术、文本自然语言处理，图像上的深度学习模型以及梯度增强技术等。</p>
@@ -146,8 +141,7 @@
 <li>机器学习中，使用Scikit-Learn简单处理文本数据</li>
 </ol>
 <p>摘要：机器学习中，我们总是要先将源数据处理成符合模型算法输入的形式，比如将文字、声音、图像转化成矩阵。对于文本数据首先要进行分词（tokenization），移除停止词（stop words），然后将词语转化成矩阵形式，然后再输入机器学习模型中，这个过程称为特征提取（feature extraction）或者向量化（vectorization）。</p>
-<p>五．机器学习杂谈篇：</p>
-<p>1.关于机器学习你必须了解的十个真相</p>
+<h2 id="五．机器学习杂谈篇："><a href="#五．机器学习杂谈篇：" class="headerlink" title="五．机器学习杂谈篇："></a>五．机器学习杂谈篇：</h2><p>1.关于机器学习你必须了解的十个真相</p>
 <p>摘要：作者从非专业人士的角度对人工智能常见的误解进行了解释说明。</p>
 <p>2.谁更胜一筹？——随机搜索 V.S. 网格搜索</p>
 <p>摘要：随机法和网格法都是常用的、有效的结构优化方法。那么它们两者当中谁更胜一筹呢？在本文中，作者通过有趣的地形搜索实验，找到了答案。</p>
@@ -321,61 +315,6 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>信贷指标</title>
-    <url>/2020/02/26/%E4%BF%A1%E8%B4%B7%E6%8C%87%E6%A0%87/</url>
-    <content><![CDATA[<h2 id="1、迁移率。"><a href="#1、迁移率。" class="headerlink" title="1、迁移率。"></a>1、迁移率。</h2><p>迁移率侧重于分析客户状态的发展变化路径，如M0-M1，M1-M2，M2-M3等。</p>
-<p>具体含义：</p>
-<ul>
-<li>M0：没有逾期；</li>
-<li>M1：表示逾期1-30天；</li>
-<li>M2：表示逾期31-60天；</li>
-<li>M3：表示逾期61-90天；</li>
-<li>M4：表示逾期91-120天；</li>
-<li>M5：表示逾期121-150天；</li>
-<li>M6：表示逾期151-180天；</li>
-<li>M6+：表示逾期180天以上。<br>迁移率模型：是一种来预测未来坏账损失的方法，它通过对历史数据中处于某一拖欠位置的账户贷款余额每月拖欠变化情况的分析，来预测当期不同拖欠周期的未来坏账损失<a id="more"></a>
-<h2 id="2、滚动率"><a href="#2、滚动率" class="headerlink" title="2、滚动率"></a>2、滚动率</h2></li>
-</ul>
-<p>滚动率分析可以对客户好坏程度进行定义。<br>滚动率分析就是从某个观察点之前的一段时间(称为观察期)的最坏的状态向观察点之后的一段时间(称为表现期)的最坏状态的发展变化情况<br> 在风险控制中，我们的根本目的是识别坏用户，通过历史数据，抓取坏客户显著区别于正常客户的特征，并以此为标准去预测未来的坏客户。用户的好坏其实很难定义，不能说逾过期的用户就是坏用户，也许人家其实想还，只是不小心忘记还款了呢。而且，有的时候，“适当”的逾期还能增加公司的逾期利息收入。我们所关注的坏客户是坏到某一程度，也就是逾期等级较高且不还款的客户。</p>
-<p>前面说的vintage是从时间维度上判断客户群体的好坏，下面说的滚动率则是从行为程度上判断客户的好坏，它可以帮助我们判断某些逾期客户是否还可以再抢救一下，收回点成本。</p>
-<p>滚动率，简单地说就是以某一时间点为观察节点，观察客户在该点前一段时间内（比如半年）最坏逾期阶段，并追踪其在观察点之后的一段时间向其他逾期阶段发展的情况，特别是向更坏程度发展的情况。举个栗子，今天是2018年5月25日，取今天的1万个客户，统计他们在过去半年里的最大逾期阶段。然后追踪他们后半年的表现。以下数字纯属虚构，完全是为了说明问题，各个公司有自己的观察数据和追踪数据。</p>
-<pre><code>M0的客户在未来半年里，98%的客户还是会保持正常M0的状态
-最大逾期阶段M1的客户在未来80%会变M0，但是还有20%会继续，甚至有5%的人往更坏的程度发展
-最大逾期阶段M2的客户在未来40%的人会继续恶化，22%左右的人会变M0（完全从良）；
-最大逾期阶段M3的客户在未来60%的人会继续恶化，15%左右的人会变M0（完全从良）；
-最大逾期阶段M3+的客户在未来80%的客户会继续此状态（没救了）。
-
-根据以上的数据，我们可能就可以得出逾期3期以上的客户，都是无力抢救的坏客户这样的结论。假如我们想把条件收紧一点，那么我们可能会选择逾3期或者2期。再假如我要给坏设定等级，那么我就可以把3期以上设为极度坏，逾3、2期的话可能设置为中度坏，逾1期的人可以是不经意的坏。这些特征将来可以放到风控建模的样本特征中来。</code></pre><h2 id="3、A卡"><a href="#3、A卡" class="headerlink" title="3、A卡"></a>3、A卡</h2><p>申请：用户会提交相关材料进行审核。这里会使用A卡！A（Application）+配套策略决定是否会放款！<br>A卡（Application score card）申请评分卡<br>贷前！</p>
-<h2 id="4、B卡"><a href="#4、B卡" class="headerlink" title="4、B卡"></a>4、B卡</h2><p>放款：贷中使用B（Behavior）卡及策略。<br>B卡（Behavior score card）行为评分卡<br>贷中！</p>
-<h2 id="5、C卡"><a href="#5、C卡" class="headerlink" title="5、C卡"></a>5、C卡</h2><p>提醒催收：C（Collection）卡！结果：用户还款或者不还款！<br>C卡（Collection score card）催收评分卡<br>贷后！</p>
-]]></content>
-      <categories>
-        <category>风控</category>
-      </categories>
-      <tags>
-        <tag>风控</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>gitlab操作</title>
-    <url>/2020/02/26/gitlab%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="命令行指南"><a href="#命令行指南" class="headerlink" title="命令行指南"></a>命令行指南</h2><p>git全局配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;lelingshan01_dxm&quot;</span><br><span class="line">git config --global user.email &quot;lelingshan01@duxiaoman.com&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建一个新项目"><a href="#创建一个新项目" class="headerlink" title="创建一个新项目"></a>创建一个新项目</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone ssh:&#x2F;&#x2F;git@gitlab.duxiaoman-int.com:8022&#x2F;lelingshan01_dxm&#x2F;demo2.git</span><br><span class="line">cd demo2</span><br><span class="line">touch README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;add README&quot;</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
-<h2 id="基于存在的文件夹新建项目"><a href="#基于存在的文件夹新建项目" class="headerlink" title="基于存在的文件夹新建项目"></a>基于存在的文件夹新建项目</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd existing_folder</span><br><span class="line">git init</span><br><span class="line">git remote add origin ssh:&#x2F;&#x2F;git@gitlab.duxiaoman-int.com:8022&#x2F;lelingshan01_dxm&#x2F;demo2.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;Initial commit&quot;</span><br><span class="line">git push -u origin master</span><br><span class="line">或者 git push origin HEAD:refs&#x2F;for&#x2F;master</span><br></pre></td></tr></table></figure>
-
-<h2 id="基于存在的git仓库新建项目"><a href="#基于存在的git仓库新建项目" class="headerlink" title="基于存在的git仓库新建项目"></a>基于存在的git仓库新建项目</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd existing_repo</span><br><span class="line">git remote rename origin old-origin</span><br><span class="line">git remote add origin ssh:&#x2F;&#x2F;git@gitlab.duxiaoman-int.com:8022&#x2F;lelingshan01_dxm&#x2F;demo2.git</span><br><span class="line">git push -u origin --all git push -u origin --tags</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>gitlab</category>
-      </categories>
-      <tags>
-        <tag>gitlab</tag>
       </tags>
   </entry>
 </search>

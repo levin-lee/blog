@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>python高级编程</title>
+    <url>/2020/04/02/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<p>1、filter函数-过滤<br>可以查看下面的例子<br>‘’’python<br>num = [1,4,-5,3,-7,6]<br>after_filter = map(lambda x:x<strong>2,filter(lambda x:x&gt;0,num))<br>print(after_filter)<br>‘’’<br>当然，也可以用python自带的迭代器,可以达到一样的效果<br>‘’’<br>after_filter = [x</strong>2 for x in num if x&gt;0]<br>‘’’<br>此外，还可以使用生成器<br>‘’’python<br>def squre_generator(parameter):<br>    rerurn(x**2 for x in num if x&gt;parameter)<br>g = list(squre_generator(0))<br>‘’’</p>
+<p>2、装饰器<br>装饰器为我们提供了一个增加已有函数或类的功能。<br>‘’’python<br>import time<br>from functools import wraps</p>
+<p>def timethis(func):<br>   @wraps(func)<br>   def wrapper(<em>args,*</em>kwargs):<br>      start = time.time()<br>      result = func(<em>args,*</em>kwargs)<br>      end = time.time()<br>      print(func.<strong>name</strong>,end-start)<br>      return wrapper</p>
+<p>@timethis<br>def countdown(n):<br>    while n&gt;0:<br>    n-=1</p>
+<p>countdown(10000)<br>‘’’</p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>向左走，向右走</title>
     <url>/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/</url>
     <content><![CDATA[<p>很喜欢台湾作家几米画的单行本《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。书中描绘着，在一座陌生的城市中，寂寞孤独的一对男女因为偶然一次缘分在公园相遇，互诉衷肠，两个落寞的心彼此感受着对方的温暖。然而，天空开始下着暴雨，俩人不得不分开，在临别前女生给男生留下写着电话的字条，就各自匆忙回家。不幸的是，字条由于雨水打湿而模糊了字迹，辨认不出号码。女生就这么焦急地等待男生的电话，而男生由于打湿字条而懊悔，满怀希望去公园等待，每次只能失望而归。时间缓缓流逝，又回到当初孤生一人的状态，生活仿佛又恢复了平静，只有他们自己知道，他们的心结了厚厚一层霜。生活在同个城市，两人有很多次机会相遇，但一人向左走，一人向右走，总是插肩而过，仿佛命运给他们开了无情的玩笑，注定无法相遇。又过了一段时间，女生打算离开这个让她伤心的城市。女生早早起床，把行李收拾好，打算在日出来临之时逃离这座城市，恰好遇上同样外出的男生。这一次，命运开始重新眷顾他们，在最重要的时刻他们重新相遇，那一刻，初升的阳光温柔地打在他们身上，暖暖的，融化了心里的霜。</p>
@@ -226,8 +240,6 @@
     <title>FRM-之信用风险管理</title>
     <url>/2020/03/03/FRM-%E4%B9%8B%E4%BF%A1%E7%94%A8%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<p><strong>信用风险管理笔记</strong></p>
-<hr>
-<p>@[TOC]</p>
 <h2 id="信用决定"><a href="#信用决定" class="headerlink" title="信用决定"></a>信用决定</h2><p>the probability of Default(PD)，the loss given default(LGD)，the exposure at default(EAD)<br>the overall expected loss(EL)<br>expected loss(EL) = PD * LGD * EL<br>Time horizon：时间窗口</p>
 <p>交易风险：</p>
 <ul>

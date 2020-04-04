@@ -3,11 +3,17 @@
   <entry>
     <title>python高级编程</title>
     <url>/2020/04/02/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<p>1、filter函数-过滤<br>可以查看下面的例子<br>‘’’python<br>num = [1,4,-5,3,-7,6]<br>after_filter = map(lambda x:x<strong>2,filter(lambda x:x&gt;0,num))<br>print(after_filter)<br>‘’’<br>当然，也可以用python自带的迭代器,可以达到一样的效果<br>‘’’<br>after_filter = [x</strong>2 for x in num if x&gt;0]<br>‘’’<br>此外，还可以使用生成器<br>‘’’python<br>def squre_generator(parameter):<br>    rerurn(x**2 for x in num if x&gt;parameter)<br>g = list(squre_generator(0))<br>‘’’</p>
-<p>2、装饰器<br>装饰器为我们提供了一个增加已有函数或类的功能。<br>‘’’python<br>import time<br>from functools import wraps</p>
-<p>def timethis(func):<br>   @wraps(func)<br>   def wrapper(<em>args,*</em>kwargs):<br>      start = time.time()<br>      result = func(<em>args,*</em>kwargs)<br>      end = time.time()<br>      print(func.<strong>name</strong>,end-start)<br>      return wrapper</p>
-<p>@timethis<br>def countdown(n):<br>    while n&gt;0:<br>    n-=1</p>
-<p>countdown(10000)<br>‘’’</p>
+    <content><![CDATA[<p>1、filter函数-过滤<br>可以查看下面的例子</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">3</span>,<span class="number">-7</span>,<span class="number">6</span>]</span><br><span class="line">after_filter = map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,filter(<span class="keyword">lambda</span> x:x&gt;<span class="number">0</span>,num))</span><br><span class="line">print(after_filter)</span><br></pre></td></tr></table></figure>
+<p>当然，也可以用python自带的迭代器,可以达到一样的效果</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">after_filter = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>此外，还可以使用生成器</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squre_generator</span><span class="params">(parameter)</span>:</span></span><br><span class="line">    rerurn(x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;parameter)</span><br><span class="line">g = list(squre_generator(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p>2、装饰器<br>装饰器为我们提供了一个增加已有函数或类的功能。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timethis</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">   @wraps(func)</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args,**kwargs)</span>:</span></span><br><span class="line">      start = time.time()</span><br><span class="line">      result = func(*args,**kwargs)</span><br><span class="line">      end = time.time()</span><br><span class="line">      print(func.__name__,end-start)</span><br><span class="line">      <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timethis</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countdown</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">    n-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">countdown(<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>python</tag>
@@ -17,7 +23,11 @@
   <entry>
     <title>向左走，向右走</title>
     <url>/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/</url>
-    <content><![CDATA[<p>很喜欢台湾作家几米画的单行本《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。书中描绘着，在一座陌生的城市中，寂寞孤独的一对男女因为偶然一次缘分在公园相遇，互诉衷肠，两个落寞的心彼此感受着对方的温暖。然而，天空开始下着暴雨，俩人不得不分开，在临别前女生给男生留下写着电话的字条，就各自匆忙回家。不幸的是，字条由于雨水打湿而模糊了字迹，辨认不出号码。女生就这么焦急地等待男生的电话，而男生由于打湿字条而懊悔，满怀希望去公园等待，每次只能失望而归。时间缓缓流逝，又回到当初孤生一人的状态，生活仿佛又恢复了平静，只有他们自己知道，他们的心结了厚厚一层霜。生活在同个城市，两人有很多次机会相遇，但一人习惯向左，一人习惯向右，总是插肩而过，仿佛命运给他们开了无情的玩笑，注定无法相遇。又过了一段时间，女生打算离开这个让她伤心的城市。女生早早起床，把行李收拾好，打算在日出来临之时逃离这座城市，恰好遇上同样外出的男生。这一次，命运开始重新眷顾他们，在最重要的时刻他们重新相遇，那一刻，初升的阳光温柔地打在他们身上，暖暖的，融化了心里的霜。<br><img src="/.io//left.jpg" alt="漫画图"><br>这本书其实带给我很深的感动。以前在学校，身边总是围绕着很多东西，心里不觉得孤单，但等我真正走出社会，我才发现，在这钢筋水泥包裹着的城市，心慢慢开始学会忍受孤独。<br>人生中我们会错过许许多多的人，有的人你会跟他相识，然后一别再也不见；有的人仅仅是打一个照面，就再也没有出现再你的世界中。“一别之后，两地相悬，怎知说那三四载，谁知是一生憾事。</p>
+    <content><![CDATA[<p>很喜欢台湾作家几米画的单行本漫画《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。</p>
+<a id="more"></a>
+<p>书中描绘着，在一座陌生的城市中，寂寞孤独的一对男女因为偶然一次缘分在公园相遇，互诉衷肠，两个落寞的心彼此感受着对方的温暖。然而，天空开始下着暴雨，俩人不得不分开，在临别前女生给男生留下写着电话的字条，就各自匆忙回家。不幸的是，字条由于雨水打湿而模糊了字迹，辨认不出号码。女生就这么焦急地等待男生的电话，而男生由于打湿字条而懊悔，满怀希望去公园等待，每次只能失望而归。时间缓缓流逝，又回到当初孤生一人的状态，生活仿佛又恢复了平静，只有他们自己知道，他们的心结了厚厚一层霜。生活在同个城市，两人有很多次机会相遇，但一人习惯向左，一人习惯向右，总是插肩而过，仿佛命运给他们开了无情的玩笑，注定无法相遇。又过了一段时间，女生打算离开这个让她伤心的城市。女生早早起床，把行李收拾好，打算在日出来临之时逃离这座城市，恰好遇上同样外出的男生。这一次，命运开始重新眷顾他们，在最重要的时刻他们重新相遇，那一刻，初升的阳光温柔地打在他们身上，暖暖的，融化了心里的霜。<br><img src="/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/left.jpg" alt="漫画图"><br>这本书其实带给我很深的感动。以前在学校，身边总是围绕着很多东西，心里不觉得孤单，但等我真正走出社会，我才发现，在这钢筋水泥包裹着的城市，心慢慢开始学会忍受孤独。慢慢地开始习惯一个人，习惯一个人吃饭、一个人逛街、一个人看电影，一个人学会忍受孤独，内心开始慢慢封闭，终于我们会发现原来一个人也会慢慢习惯。</p>
+<p>本书带给我的另一个感受是，人的一生会错过许许多多的人，有的人你会跟他相识相知，然后一别再也不见；有的人仅仅是打一个照面，就再也没有出现在你的世界中。每一天我们都在上演这离别戏码，可能是你身边的爱人和家人，也有可能是司机、路人、乘客。每次离别时，我们总以为还有机会再见，下次会有勇气把“我喜欢你”说给心底的那人听，但往往离别之后，再也无法遇见，未说出口的表白成为永久的遗憾。</p>
+<p>一别之后，两地相悬，怎知说那三四载，谁知是一生憾事。</p>
 ]]></content>
       <tags>
         <tag>感悟</tag>

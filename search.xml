@@ -76,8 +76,8 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 </ul>
 ]]></content>
       <tags>
-        <tag>编程</tag>
         <tag>Linux</tag>
+        <tag>编程</tag>
       </tags>
   </entry>
   <entry>
@@ -96,8 +96,8 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 
 ]]></content>
       <tags>
-        <tag>python</tag>
         <tag>编程</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>

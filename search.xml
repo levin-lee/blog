@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>模型评估</title>
+    <url>/2020/04/05/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>评分卡</title>
+    <url>/2020/04/05/%E8%AF%84%E5%88%86%E5%8D%A1/</url>
+    <content><![CDATA[<p>评分卡又称A卡，在金融领域，尤其是银行利用最多的模型，经常运用到贷前准入环节。它具有可解释性，模型稳定等各种优势。</p>
+<a id="more"></a>
+<p>得到评分卡的步骤如下：<br>一、认清目标<br>我们的目标是预测用户为好人的概率，并将概率转换成打分形式。分数越高表示用户的资质越好。</p>
+<p>二、数据清洗和数据加工<br>将我们的非结构数据转化成结构化数据，连续数据转离散数据，去除异常值，标准化处理（最大最小值；正态标准化等）；<br>分箱操作就是将连续数据转成离散数据的方法之一。分箱的优势为：1、排除异常值的影响，例如：年龄为200岁；2、可以防止模型过拟合；3、为模型引入非线性，提高表达能力<br>分箱方法：</p>
+<ul>
+<li>监督方法：卡方分箱法、IV最大化分箱法</li>
+<li>无监督方法：k-means聚类、等频、等宽</li>
+</ul>
+<p>三、特征工程<br>得到相对多的特征变量，在得到IV值之前，需要进行WOE，即特征转换。<br>之后分别计算IV值（information value），计算IV值。<br>根据IV值大小排列，IV值越高代表单个变量的可解释性越高。<br>得到比较重要的特征，取前topN特征代入线性回归中。<br>IV&lt;=0.02，没有解释性<br>0.1&lt;=IV&lt;0.02，具有较弱的解释性<br>0.3&lt;=IV&lt;=0.1，具有较强的解释性<br>0.3&lt;=IV，具有极强的解释性<br>一般来说，IV大于0.1时候，特征就可以保留下来。</p>
+<p>四、LR线性回归<br>普通线性回归为：y = \beta_1<em>x_1+\beta_2</em>x_2+…+\beta_n<em>x_n，而logistic回归是将普通线性回归映射到 [0,1] 范围内。<br>Logistic 函数为：f(x) = \frac{1}{1+e^-x}<br>假定P是用户为坏人的概率，则1-P是用户为好人的概率，P∈[0,1]。<br>P(y=1|x) = \frac{e^wx}{1+e^wx}  ….. (1)<br>P(y=0|x) = \frac{1}{1+e^wx}        ……(2)<br>则 ods = \frac{p}{1-p}，是坏人与好人的几率。令p=P(y=1|x)，则好人的概率为1-p<br>将公式1除以公式2可得，ln\frac{p}{1-p} = wx，令y= ln\frac{p}{1-p}<br>故 lny = w_1</em>x_1+w_2<em>x_2+…+w_n</em>x_n</p>
+<p>目标函数（损失函数）：<br>这里我们利用极大似然估计来得到logistic回归的损失函数：<br>L = \prod{I=1}{N}p^y_i+(1-p)^(1-y_i) ，<br>则lnL<br>        =  \sum{I=1}{N}ylnp+(1-)yln(1-p)<br>        =  \sum{I=1}{N}yln\frac{p}{1-p}+ln(1-p)<br>        =  \sum{I=1}{N}ywx+ln(\frac{1}{1+e^wx})</p>
+<p>如何使损失函数最小化，这个时候就需要利用坐标下降法，来得到各个特征系数的值。</p>
+<p>五、得到评分卡<br>在第四步，我们得到坏人的概率之后，就需要将概率转换成我们所需要的分数。<br>在得到分数之前，我们需要定义三个参数：</p>
+<ul>
+<li>基准odds好坏比，即\frac{p}{1-p}</li>
+<li>基准分数</li>
+<li>PDO(points to Double the odds)：当odds增加两倍时，所减少的信用分<br>可以列式子：</li>
+</ul>
+<ol>
+<li>Base_score = A - Bln(odds)</li>
+<li>Base_score - PDO = A - Bln(2odds)<br>可以得到：A = base_score + frac{PDO}{ln(2)}*ln(odds)，B = frac{PDO}{ln(2)}<br>当我们希望信用分为600分时，对应的ods为1:50。当ods扩大为2:50时，信用分降低20分至580分(PDO=20)，可以求出AB的取值。<br>A=487.122 ，B=28.854<br>六、模型评估<br>详见《模型与策略评估》专栏。</li>
+</ol>
+<p>参考目录：<br>【1】《统计学习方法》-李航<br>【2】《机器学习》-周志华</p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>LR</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux基本操作指令</title>
     <url>/2020/04/05/Linux%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<p>一，注销，关机，重启<br>1、Logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达<br>logout 命令即可：<br>2、关机或重新启动的 shutdown 命令：<br>    －h 参数让系统立即关机<br>        shutdown –h now ← 要求系统立即关机；<br>        shutdown now ← 立刻关机；<br>        shutdown +5 ← 5 分钟后关机；<br>        shutdown 10:30 ← 在 10：30 时关机；<br>    －r 参数设置关机后重新启动<br>        shutdown -r now ← 立刻关闭系统并重启；<br>        shutdown -r 23:59 ← 指定在 23：59 时重启动；</p>
@@ -39,8 +76,8 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 </ul>
 ]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>编程</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -59,8 +96,8 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 
 ]]></content>
       <tags>
-        <tag>编程</tag>
         <tag>python</tag>
+        <tag>编程</tag>
       </tags>
   </entry>
   <entry>

@@ -3,16 +3,13 @@
   <entry>
     <title>Hive操作</title>
     <url>/2020/04/18/Hive%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>小表join大表原则；<br>Hive中的常用基本数据类型：<br>数据类型<br>长度<br>备注<br>Tinyint<br>1字节的有符号整数<br>-128<del>127<br>SmallInt<br>1个字节的有符号整数<br>-32768</del>32767<br>Int<br>4个字节的有符号整数<br>-2147483648 ~ 2147483647<br>BigInt<br>8个字节的有符号整数 </p>
+    <content><![CDATA[<p>小表join大表原则；<br>Hive中的常用基本数据类型：<br>数据类型<br>长度<br>备注<br>Tinyint<br>1字节的有符号整数<br>-128~127<br>SmallInt<br>1个字节的有符号整数<br>-32768~32767<br>Int<br>4个字节的有符号整数<br>-2147483648 ~ 2147483647<br>BigInt<br>8个字节的有符号整数 </p>
 <p>Boolean<br>布尔类型，true或者false<br>true、false<br>Float<br>单精度浮点数 </p>
 <p>Double<br>双精度浮点数 </p>
 <p>String<br>字符串 </p>
 <p>TimeStamp<br>整数<br>支持Unix timestamp，可以达到纳秒精度<br>Binary<br>字节数组 </p>
-<p>Date<br>日期<br>0000-01-01 ~ 9999-12-31，常用String代替 </p>
-<hr>
-<hr>
-<hr>
-<p>创建数据库例子：<br>hive&gt; create database if not exists user_db;</p>
+<p>Date<br>日期 </p>
+<h2 id="0000-01-01-9999-12-31，常用String代替"><a href="#0000-01-01-9999-12-31，常用String代替" class="headerlink" title="0000-01-01 ~ 9999-12-31，常用String代替 "></a>0000-01-01 ~ 9999-12-31，常用String代替 </h2><h2 id="—"><a href="#—" class="headerlink" title="—- "></a>—- </h2><p>创建数据库例子：<br>hive&gt; create database if not exists user_db;</p>
 <p>查看数据库定义：<br>hive&gt; describe database user_db;</p>
 <p>查看数据库列表：<br>hive&gt; show databases; </p>
 <p>删除数据库：<br>hive&gt; drop database if exists testdb cascade;</p>
@@ -32,7 +29,7 @@
 <p>插入数据的表是分区表：<br>insert overwrite table user_leads PARTITION (dt=’2017-05-26’)<br>select * from  user_leads_tmp;</p>
 <p>复制表：<br>create table user_leads_bak<br>row format delimited fields terminated by ‘\t’<br>stored as textfile<br>as<br>select leads_id,user_id,’2016-08-22’ as bakdate<br>from user_leads<br>where create_time&lt;’2016-08-22’;</p>
 <p>克隆表：<br>——克隆表时会克隆源表的所有元数据信息，但是不会复制源表的数据<br>create table user_leads_like like  user_leads;</p>
-<p>Where筛选：<br>操作符<br>说明<br>操作符<br>说明<br>A=B<br>A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B<br>都为Null则返回True，其他和=一样<br>A&lt;&gt;B<br>不等于<br>A!=B<br>不等于<br>A&lt;B<br>小于<br>A&lt;=B<br>小于等于<br>A&gt;B<br>大于<br>A&gt;=B<br>大于等于<br>A Between B And C<br>筛选A的值处于B和C之间<br>A Not Between B And C<br>筛选A的值不处于B和C之间<br>A Is NULL<br>筛选A是NULL的<br>A Is Not NULL<br>筛选A值不是NULL的<br>A Link B<br>%一个或者多个字符_一个字符<br>A Not Like B<br>%一个或者多个字符_一个字符<br>A RLike B<br>正则匹配 </p>
+<p>Where筛选：<br>操作符<br>说明<br>操作符<br>说明<br>A=B<br>A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B<br>都为Null则返回True，其他和=一样<br>A&lt;&gt;B<br>不等于<br>A!=B<br>不等于<br>A<B 小于 a<="B" 小于等于 a>B<br>大于<br>A&gt;=B<br>大于等于<br>A Between B And C<br>筛选A的值处于B和C之间<br>A Not Between B And C<br>筛选A的值不处于B和C之间<br>A Is NULL<br>筛选A是NULL的<br>A Is Not NULL<br>筛选A值不是NULL的<br>A Link B<br>%一个或者多个字符<em>一个字符<br>A Not Like B<br>%一个或者多个字符</em>一个字符<br>A RLike B<br>正则匹配 </B></p>
 <p>排序：</p>
 <p>Sort By：<br>——Hive中尽量不要用Order By，除非非常确定结果集很小<br>select * from user_leads sort by user_id</p>
 <p>日期函数：</p>
@@ -59,44 +56,22 @@
   <entry>
     <title>linux之shell</title>
     <url>/2020/04/18/linux%E4%B9%8Bshell/</url>
-    <content><![CDATA[<p>$# 是传给脚本的参数个数<br>$0 是脚本本身的名字<br>$1 是传递给该shell脚本的第一个参数<br>$2 是传递给该shell脚本的第二个参数<br>$@ 是传给脚本的所有参数的列表<br>$* 是以一个单字符串显示所有向脚本传递的参数，与位置变量不同，参数可超过9个<br>$$ 是脚本运行的当前进程ID号<br>$? 是显示最后命令的退出状态，0表示没有错误，其他表示有错误</p>
-<p>1、if-then语句</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if test command</span><br><span class="line">then commands</span><br><span class="line">else commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
+    <content><![CDATA[<p>$# 是传给脚本的参数个数<br>$0 是脚本本身的名字<br>$1 是传递给该shell脚本的第一个参数<br>$2 是传递给该shell脚本的第二个参数<br>$@ 是传给脚本的所有参数的列表<br>$* 是以一个单字符串显示所有向脚本传递的参数，与位置变量不同，参数可超过9个</p>
+<p>$$ 是脚本运行的当前进程ID号<br>$? 是显示最后命令的退出状态，0表示没有错误，其他表示有错误</p>
+<p>1、if-then语句<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if test command</span><br><span class="line">then commands</span><br><span class="line">else commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
 <p>test检测：<br>数字<br>n1 -eq n2     检查n1是否与n2相等<br>n1 -ge n2     检查n1是否大于或等于n2<br>n1 -gt n2     检查n1是否大于n2<br>n1 -le n2     检查n1是否小于或等于n2<br>n1 -lt n2     检查n1是否小于n2<br>n1 -ne n2     检查n1是否不等于n2</p>
 <p>字符串<br>-n str1       检查str1的长度是否非0<br>-z str1       检查str1的长度是否为0</p>
-<p>2、for循环</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for var in list do</span><br><span class="line">commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">file&#x3D;“states”</span><br><span class="line">IFS&#x3D;$&#39;\n’   #能读空行的值</span><br><span class="line">for state in $(cat $file)</span><br><span class="line">do</span><br><span class="line">   echo &quot;Visit beautiful $state&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
+<p>2、for循环<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for var in list do</span><br><span class="line">commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">file&#x3D;“states”</span><br><span class="line">IFS&#x3D;$&#39;\n’   #能读空行的值</span><br><span class="line">for state in $(cat $file)</span><br><span class="line">do</span><br><span class="line">   echo &quot;Visit beautiful $state&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
 <p>跳出循环：break、continue</p>
-<p>3、创建函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function name &#123; commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>高级函数<br>4、sed命令<br>Sed编辑器被称为流编辑器，与普通的交互式文本编辑器想法。<br>1）在命令行定义编辑器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ Echo “this is a test” | sed ’s&#x2F;test&#x2F;big test’</span><br></pre></td></tr></table></figure>
-<p>This is a big test<br>或者</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed ’s&#x2F;dog&#x2F;cat&#x2F;‘ data.txt</span><br></pre></td></tr></table></figure>
-<p>Sed编辑器并不会修改文本文件的数据</p>
-<p>2）在命令行使用多个编辑器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed -e ’s&#x2F;brown&#x2F;green&#x2F;; s&#x2F;dog&#x2F;cat’ data.txt</span><br></pre></td></tr></table></figure>
-<p> 必须要用；分割</p>
-<p>3）从文件中读取编辑器命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed -f script1.sed datat.txt</span><br></pre></td></tr></table></figure>
-
-<p>4）写入文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed ‘1,2w test.txt’ datat.txt</span><br></pre></td></tr></table></figure>
-<p>将test.txt文件的前两行打印到data.txt文件中</p>
+<p>3、创建函数<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function name &#123; commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>高级函数<br>4、sed命令<br>Sed编辑器被称为流编辑器，与普通的交互式文本编辑器想法。<br>1）在命令行定义编辑器<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ Echo “this is a test” | sed ’s&#x2F;test&#x2F;big test’</span><br></pre></td></tr></table></figure><br>This is a big test<br>或者<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed ’s&#x2F;dog&#x2F;cat&#x2F;‘ data.txt</span><br></pre></td></tr></table></figure><br>Sed编辑器并不会修改文本文件的数据</p>
+<p>2）在命令行使用多个编辑器<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed -e ’s&#x2F;brown&#x2F;green&#x2F;; s&#x2F;dog&#x2F;cat’ data.txt</span><br></pre></td></tr></table></figure><br> 必须要用；分割</p>
+<p>3）从文件中读取编辑器命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed -f script1.sed datat.txt</span><br></pre></td></tr></table></figure></p>
+<p>4）写入文件<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sed ‘1,2w test.txt’ datat.txt</span><br></pre></td></tr></table></figure><br>将test.txt文件的前两行打印到data.txt文件中</p>
 <p>5、awk命令</p>
-<p>1）格式化输出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;&#123;printf &quot;%-8s %-10s\n&quot;,$1,$4&#125;&#39; log.txt</span><br></pre></td></tr></table></figure>
-
-<p>2）使用，分割</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN&#123;FS&#x3D;&quot;,&quot;&#125; &#123;print $1,$2&#125;&#39;  log.txt</span><br></pre></td></tr></table></figure>
-
-<p>3）条件语句</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN &#123;</span><br><span class="line">    num &#x3D; 11; </span><br><span class="line">    if (num % 2 &#x3D;&#x3D; 0) printf &quot;%d 是偶数\n&quot;, num; </span><br><span class="line">    else printf &quot;%d 是奇数\n&quot;, num </span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
+<p>1）格式化输出<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;&#123;printf &quot;%-8s %-10s\n&quot;,$1,$4&#125;&#39; log.txt</span><br></pre></td></tr></table></figure></p>
+<p>2）使用，分割<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN&#123;FS&#x3D;&quot;,&quot;&#125; &#123;print $1,$2&#125;&#39;  log.txt</span><br></pre></td></tr></table></figure></p>
+<p>3）条件语句<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN &#123;</span><br><span class="line">    num &#x3D; 11; </span><br><span class="line">    if (num % 2 &#x3D;&#x3D; 0) printf &quot;%d 是偶数\n&quot;, num; </span><br><span class="line">    else printf &quot;%d 是奇数\n&quot;, num </span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <tags>
         <tag>linux</tag>
@@ -121,9 +96,7 @@
   <entry>
     <title>评分卡</title>
     <url>/2020/04/05/%E8%AF%84%E5%88%86%E5%8D%A1/</url>
-    <content><![CDATA[<p>评分卡又称A卡，在金融领域，尤其是银行利用最多的模型，经常运用到贷前准入环节。它具有可解释性，模型稳定等各种优势。</p>
-<a id="more"></a>
-<p>得到评分卡的步骤如下：<br>一、认清目标<br>我们的目标是预测用户为好人的概率，并将概率转换成打分形式。分数越高表示用户的资质越好。</p>
+    <content><![CDATA[<p>评分卡又称A卡，在金融领域，尤其是银行利用最多的模型，经常运用到贷前准入环节。它具有可解释性，模型稳定等各种优势。<br><a id="more"></a><br>得到评分卡的步骤如下：<br>一、认清目标<br>我们的目标是预测用户为好人的概率，并将概率转换成打分形式。分数越高表示用户的资质越好。</p>
 <p>二、数据清洗和数据加工<br>将我们的非结构数据转化成结构化数据，连续数据转离散数据，去除异常值，标准化处理（最大最小值；正态标准化等）；<br>分箱操作就是将连续数据转成离散数据的方法之一。分箱的优势为：1、排除异常值的影响，例如：年龄为200岁；2、可以防止模型过拟合；3、为模型引入非线性，提高表达能力<br>分箱方法：</p>
 <ul>
 <li>监督方法：卡方分箱法、IV最大化分箱法</li>
@@ -153,9 +126,7 @@
   <entry>
     <title>Linux基本操作指令</title>
     <url>/2020/04/05/Linux%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<p>一，注销，关机，重启<br>1、Logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达<br>logout 命令即可：<br>2、关机或重新启动的 shutdown 命令：<br>    －h 参数让系统立即关机<br>        shutdown –h now ← 要求系统立即关机；<br>        shutdown now ← 立刻关机；<br>        shutdown +5 ← 5 分钟后关机；<br>        shutdown 10:30 ← 在 10：30 时关机；<br>    －r 参数设置关机后重新启动<br>        shutdown -r now ← 立刻关闭系统并重启；<br>        shutdown -r 23:59 ← 指定在 23：59 时重启动；</p>
-<a id="more"></a>
-<p>3、重新启动计算机的 reboot 命令：<br>     -f 参数：不依正常的程序运行关机，直接关闭系统并重新启动计算机；<br>     -I 参数：在在重新启动之前关闭所有网络接口；<br>     虽然 reboot 命令有个参数可以使用，但是一般只需要单独运行 reboot 命令就可以了<br>二，文件与目录的操作<br>1、列出文件列表的 ls 命令<br>    ls：显示当前目录的内容；<br>    ls –a： 当运行 ls 命令时，并不会显示名称以“.”开头的文件。因此可加上“-a”参数指<br>定要列出这些文件；<br>    ls –s –S：以“-s”参数显示每个文件所有的空间，并以“-S”参数指定按所有占用空间的大<br>小排序；<br>    ls –l/usr/games：在 ls 命令后直接加上欲显示的目录路径，就会列出该目录的内容；<br>2、切换目录的 cd 命令<br>     cd tony ← 切换到当前目录下的 tony 子目录；<br>     cd .. ← 切换到上一层目录；<br>     cd / ← 切换到系统根目录；<br>     cd /usr/bin ← 切换到/usr/bin 目；<br>3、创建目录的 mkdir 命令<br>     mkdir tool：在目录下创建 tool 子目录<br>4、删除目录的 rmdir 命令<br>     rmdir tool ← 删除 tool 目录<br>5、复制文件的 cp 命令<br>     cp data1.txt data2.txt ← 将 data1.txt 复制成 data2.txt；<br>     cp data3.txt /tmp/data ← 将 data3 复制到/tmp/data 目录中；<br>    加入-v 参数可显示命令执行过程：<br>         cp zip.txt zip2.txt ← 一般状态下不会显示复制过程；<br>         cp –v zip.txt zip3.txt ← 以-v 显示复制过程；<br>    加入“-R”参数可同时复制目录下的所有文件及子目录：<br>         cp –v –R * backup ← 将所有文件（含子目录文件）复制到 backup 目录<br>6、删除文件或目录的 rm 命令<br>         rm myfile ← 删除指定的文件；<br>         rm * ← 删除当前目录中的所有文件；<br>    使用-f 参数时，rm 命令会直接删除文件，不再询问：<br>        rm –f *.txt ← 强迫删除文件；<br>    -r 也是一个相当常用的参数，使用此参数可同时删除指定目录下的所有文件及子目录<br>        rm –r data ← 删除 data 目录（含 data 目录下所有文件和子目录）；<br>        rm –r * ← 删除所有文件（含当前目录所有文件，所有子目录和子目录下的文件）<br>    使用-rf 参数，系统将直接删除该目录中所有的文件及子目录，不再询问。<br>         rm –rf tmp 强制删除 tmp 目录及该目录下所有文件及子目录；<br>7、让显示画面暂停的 more 命令<br>         ls –al more：当使用 ls 命令查看文件列表时，若文件太多则可以配合 more 命令使用；<br>         more data.txt： 单独使用 more 命令时，可用来显示文字文件的内容；<br>8、连接文件的 cat 命令<br>    cat命令可以显示文件的内容（经常和 more 命令搭配使用），或是将数个文件合并成一个文件<br>         cat preface.txt more：逐页显示 preface.txt 的内容；<br>         cat preface.txt &gt;&gt; outline.txt： preface.txt 附加到 outline.txt 文件之后；<br>         cat new.txt info.txt &gt;readme.txt：将 new.txt 和 info.txt 合并成 readme.txt 文件<br>    一次显示整个文件：<br>        cat filename<br>9、移动或更换文件，目录名称的 mv 命令<br>    mv（move）命令可以将文件及目录移动到另一个目录下面，或更换文件及目录的名称<br>        mv a.txt .. ← 将 a.txt 文件移到上层目录<br>        mv z1.txt z3.txt ← 将 z1.txt 改名成 z3.txt<br>         cd.. ← 切换到上一层目录<br>        mv backup.. ← backup 目录上移一层<br>10、显示当前所在目录的 pwd 命令<br>    pwd(print working directory)命令可显示用户当前所在的目录<br>11、查找文件的 locate 命令<br>    locate 命令可用来搜索包含指定条件字符串的文件或目录<br>         locate zh_CN 列出所有包含“zh_CN”字符串的文件和目录<br>12、搜索字符串得 grep 命令<br>    grep 命令可以搜索特定字符串来并显示出来<br>         grep text *.conf ← 搜索当前目录中扩展名为.conf 且包含“text”字符串；<br>        grep:amd.conf: ← 拒绝不符权限得操作；<br>        grep:diskcheck.conf: ← 拒绝不符权限得操作；<br>        grep:grub.conf ← 拒绝不符权限得操作；<br>        grep –s text *.conf：拒绝不符权限的操作之类的错误信息，可使用-s 参数消除<br>13、重导与管道<br>    “&gt;”可将结果输出到文件中，该文件原有的内容会被删除：“&gt;&gt;”则将结果附加到文件中，原文件内容不<br>会被清除<br>         ls –a&gt;dir.txt ← 将 ls –a 命令执行结果输出到 dir.txt 文件；<br>         cat data1.txt &gt;&gt; data2.txt ← 将 data1.txt 内容附加到 data2.txt 文件之后。<br>    通道(pipe)命令的符号是“ ”，可将某命令的结果输出给另一命令<br>         ls gerp conf ← 搜索并显示 ls 命令运行结果中包含有“conf”字符串；<br>         yes rm –r mydir：在删除文件或目录的时，可以利用 yes 命令重复输出“y”字符的特性，将结果传给 rm<br> 命令，如此即可避免重复输入“y”<br>14、Linux文件内容查看</p>
+    <content><![CDATA[<p>一，注销，关机，重启<br>1、Logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达<br>logout 命令即可：<br>2、关机或重新启动的 shutdown 命令：<br>    －h 参数让系统立即关机<br>        shutdown –h now ← 要求系统立即关机；<br>        shutdown now ← 立刻关机；<br>        shutdown +5 ← 5 分钟后关机；<br>        shutdown 10:30 ← 在 10：30 时关机；<br>    －r 参数设置关机后重新启动<br>        shutdown -r now ← 立刻关闭系统并重启；<br>        shutdown -r 23:59 ← 指定在 23：59 时重启动；<br><a id="more"></a><br>3、重新启动计算机的 reboot 命令：<br>     -f 参数：不依正常的程序运行关机，直接关闭系统并重新启动计算机；<br>     -I 参数：在在重新启动之前关闭所有网络接口；<br>     虽然 reboot 命令有个参数可以使用，但是一般只需要单独运行 reboot 命令就可以了<br>二，文件与目录的操作<br>1、列出文件列表的 ls 命令<br>    ls：显示当前目录的内容；<br>    ls –a： 当运行 ls 命令时，并不会显示名称以“.”开头的文件。因此可加上“-a”参数指<br>定要列出这些文件；<br>    ls –s –S：以“-s”参数显示每个文件所有的空间，并以“-S”参数指定按所有占用空间的大<br>小排序；<br>    ls –l/usr/games：在 ls 命令后直接加上欲显示的目录路径，就会列出该目录的内容；<br>2、切换目录的 cd 命令<br>     cd tony ← 切换到当前目录下的 tony 子目录；<br>     cd .. ← 切换到上一层目录；<br>     cd / ← 切换到系统根目录；<br>     cd /usr/bin ← 切换到/usr/bin 目；<br>3、创建目录的 mkdir 命令<br>     mkdir tool：在目录下创建 tool 子目录<br>4、删除目录的 rmdir 命令<br>     rmdir tool ← 删除 tool 目录<br>5、复制文件的 cp 命令<br>     cp data1.txt data2.txt ← 将 data1.txt 复制成 data2.txt；<br>     cp data3.txt /tmp/data ← 将 data3 复制到/tmp/data 目录中；<br>    加入-v 参数可显示命令执行过程：<br>         cp zip.txt zip2.txt ← 一般状态下不会显示复制过程；<br>         cp –v zip.txt zip3.txt ← 以-v 显示复制过程；<br>    加入“-R”参数可同时复制目录下的所有文件及子目录：<br>         cp –v –R <em> backup ← 将所有文件（含子目录文件）复制到 backup 目录<br>6、删除文件或目录的 rm 命令<br>         rm myfile ← 删除指定的文件；<br>         rm </em> ← 删除当前目录中的所有文件；<br>    使用-f 参数时，rm 命令会直接删除文件，不再询问：<br>        rm –f <em>.txt ← 强迫删除文件；<br>    -r 也是一个相当常用的参数，使用此参数可同时删除指定目录下的所有文件及子目录<br>        rm –r data ← 删除 data 目录（含 data 目录下所有文件和子目录）；<br>        rm –r </em> ← 删除所有文件（含当前目录所有文件，所有子目录和子目录下的文件）<br>    使用-rf 参数，系统将直接删除该目录中所有的文件及子目录，不再询问。<br>         rm –rf tmp 强制删除 tmp 目录及该目录下所有文件及子目录；<br>7、让显示画面暂停的 more 命令<br>         ls –al more：当使用 ls 命令查看文件列表时，若文件太多则可以配合 more 命令使用；<br>         more data.txt： 单独使用 more 命令时，可用来显示文字文件的内容；<br>8、连接文件的 cat 命令<br>    cat命令可以显示文件的内容（经常和 more 命令搭配使用），或是将数个文件合并成一个文件<br>         cat preface.txt more：逐页显示 preface.txt 的内容；<br>         cat preface.txt &gt;&gt; outline.txt： preface.txt 附加到 outline.txt 文件之后；<br>         cat new.txt info.txt &gt;readme.txt：将 new.txt 和 info.txt 合并成 readme.txt 文件<br>    一次显示整个文件：<br>        cat filename<br>9、移动或更换文件，目录名称的 mv 命令<br>    mv（move）命令可以将文件及目录移动到另一个目录下面，或更换文件及目录的名称<br>        mv a.txt .. ← 将 a.txt 文件移到上层目录<br>        mv z1.txt z3.txt ← 将 z1.txt 改名成 z3.txt<br>         cd.. ← 切换到上一层目录<br>        mv backup.. ← backup 目录上移一层<br>10、显示当前所在目录的 pwd 命令<br>    pwd(print working directory)命令可显示用户当前所在的目录<br>11、查找文件的 locate 命令<br>    locate 命令可用来搜索包含指定条件字符串的文件或目录<br>         locate zh_CN 列出所有包含“zh_CN”字符串的文件和目录<br>12、搜索字符串得 grep 命令<br>    grep 命令可以搜索特定字符串来并显示出来<br>         grep text <em>.conf ← 搜索当前目录中扩展名为.conf 且包含“text”字符串；<br>        grep:amd.conf: ← 拒绝不符权限得操作；<br>        grep:diskcheck.conf: ← 拒绝不符权限得操作；<br>        grep:grub.conf ← 拒绝不符权限得操作；<br>        grep –s text </em>.conf：拒绝不符权限的操作之类的错误信息，可使用-s 参数消除<br>13、重导与管道<br>    “&gt;”可将结果输出到文件中，该文件原有的内容会被删除：“&gt;&gt;”则将结果附加到文件中，原文件内容不<br>会被清除<br>         ls –a&gt;dir.txt ← 将 ls –a 命令执行结果输出到 dir.txt 文件；<br>         cat data1.txt &gt;&gt; data2.txt ← 将 data1.txt 内容附加到 data2.txt 文件之后。<br>    通道(pipe)命令的符号是“ ”，可将某命令的结果输出给另一命令<br>         ls gerp conf ← 搜索并显示 ls 命令运行结果中包含有“conf”字符串；<br>         yes rm –r mydir：在删除文件或目录的时，可以利用 yes 命令重复输出“y”字符的特性，将结果传给 rm<br> 命令，如此即可避免重复输入“y”<br>14、Linux文件内容查看</p>
 <ul>
 <li>Cat 由第一行开始显示文件内容</li>
 <li>Tac 从文件最后一行开始显示</li>
@@ -163,29 +134,40 @@
 <li>more一页一页的显示文件内容</li>
 <li>less与more类似，但是比more更好的是，他可以往前翻页</li>
 <li>head只看头几行</li>
-<li>tail只看尾巴几行<br>三、打包、压缩与解压缩<br>1、打包文件的 tar 命令<br>tar 命令位于/bin 目录中，它能将用户所指定的文件或目录打包成一个文件<pre><code>-c：创建一个新的 tar 文件；
- -v：显示运作过程信息；
- -f：在：指定文件名称；
- -z：调用 gzip 压缩命令执行压缩；
- -j：调用 bzip2 压缩命令执行压缩；
--t：参看压缩文件内容；
--x：解开 tar 文件
-         tar cvf data.tar * ← 将目录下所有文件打包成 data.tar；
-         tar cvf data.tar.gz * ← 将目录所有文件打包成 data.tar 再用 gzip 命令压缩；
-         tar tvf data.tar * ← 查看 data.tar 文件中包括了哪些文件；
-         tar xvf data.tar * ← 将 data.tar 解开</code></pre>2、压缩与解压缩<br>  使用-z 参数来解开最常见的.tar.gz 文件：<pre><code>tar –zxvf foo.tar.gz ←将文件解开至当前目录下</code></pre>  使用-j 参数解开 tar.bz2 压缩文件：<pre><code>tar –jxvf linux-2.4.20tar.bz2 ←将文件解开至当前目录下</code></pre>   使用-Z 参数指定以 compress 命令压缩：<pre><code>tar –cZvf prcture.tar.Z*.tif 将该目录下所有.tif 打包并命令压缩成.tar.Z文件</code></pre>四：其他常用命令<br>1、修改密码的 passwd 命令<br>  passwd（password）命令可让用户变更密码<br>2、创建引导盘的 mkbootdisk 命令<br>  利用 mkbootdisk 命令创建一张新的引导盘：<pre><code>mkbootdisk ‘uname -r</code></pre>3、显示与设置时间的 date、clock 和 ntpdate 命令<br>  date 命令可以显示当前日期时间；<br>  clock 命令也可以显示出系统当前的日期与时间；<pre><code>date 09091200 ← 将时间设定为 9 月 9 日 12 点 00 分；
-ntpdate stdtime.microsoft.com ← 与微软校时服务器校时；
-clock –w：这样下次启动时才会使用更改过的时间</code></pre></li>
+<li>tail只看尾巴几行<br>三、打包、压缩与解压缩<br>1、打包文件的 tar 命令<br>tar 命令位于/bin 目录中，它能将用户所指定的文件或目录打包成一个文件<pre><code>  -c：创建一个新的 tar 文件；
+   -v：显示运作过程信息；
+   -f：在：指定文件名称；
+   -z：调用 gzip 压缩命令执行压缩；
+   -j：调用 bzip2 压缩命令执行压缩；
+  -t：参看压缩文件内容；
+  -x：解开 tar 文件
+           tar cvf data.tar * ← 将目录下所有文件打包成 data.tar；
+           tar cvf data.tar.gz * ← 将目录所有文件打包成 data.tar 再用 gzip 命令压缩；
+           tar tvf data.tar * ← 查看 data.tar 文件中包括了哪些文件；
+           tar xvf data.tar * ← 将 data.tar 解开
+</code></pre>2、压缩与解压缩<br>  使用-z 参数来解开最常见的.tar.gz 文件：<pre><code>   tar –zxvf foo.tar.gz ←将文件解开至当前目录下
+</code></pre>  使用-j 参数解开 tar.bz2 压缩文件：<pre><code>   tar –jxvf linux-2.4.20tar.bz2 ←将文件解开至当前目录下
+</code></pre>   使用-Z 参数指定以 compress 命令压缩：<pre><code>   tar –cZvf prcture.tar.Z*.tif 将该目录下所有.tif 打包并命令压缩成.tar.Z文件
+</code></pre>四：其他常用命令<br>1、修改密码的 passwd 命令<br>  passwd（password）命令可让用户变更密码<br>2、创建引导盘的 mkbootdisk 命令<br>  利用 mkbootdisk 命令创建一张新的引导盘：<pre><code>   mkbootdisk ‘uname -r
+</code></pre>3、显示与设置时间的 date、clock 和 ntpdate 命令<br>  date 命令可以显示当前日期时间；<br>  clock 命令也可以显示出系统当前的日期与时间；<pre><code>   date 09091200 ← 将时间设定为 9 月 9 日 12 点 00 分；
+   ntpdate stdtime.microsoft.com ← 与微软校时服务器校时；
+   clock –w：这样下次启动时才会使用更改过的时间
+</code></pre></li>
 </ul>
 <p>环境变量的查看</p>
 <p>1、使用echo命令查看单个环境变量。例如：<br>echo $PATH<br>2、使用env查看所有环境变量。例如：<br>env<br>3、使用set查看所有本地定义的环境变量</p>
-<p>杀死正在进行或已经是DEST状态的进程<br>        ps -aux：查看所有进程<br>        sudo kill PID：杀死相对应的PID号码<br>文件查看<br>使用wc命令 具体通过wc –help 可以查看。</p>
+<p>杀死正在进行或已经是DEST状态的进程<br>        ps -aux：查看所有进程<br>        sudo kill PID：杀死相对应的PID号码<br>文件查看<br>使用wc命令 具体通过wc —help 可以查看。</p>
 <ul>
 <li>wc -l filename 就是查看文件里有多少行；</li>
 <li>wc -w filename 看文件里有多少个word；</li>
-<li>wc -L filename 文件里最长的那一行是多少个字。<br>wc命令<br>　　wc命令的功能为统计指定文件中的字节数、字数、行数, 并将统计结果显示输出。<br>　　语法：wc [选项] 文件…<br>　　wc同时也给出所有指定文件的总统计数。字是由空格字符区分开的最大字符串。该命令各选项含义如下：<br>　　- c 统计字节数。<br>　　- l 统计行数。<br>　　- w 统计字数。<br>　　这些选项可以组合使用。输出列的顺序和数目不受选项的顺序和数目的影响。总是按下述顺序显示并且每项最多一列。<br>　　行数、字数、字节数、文件名<br>　　如果命令行中没有文件名，则输出中不出现文件名。<br>　　例如：<br>　　$ wc - lcw file1 file2<br>　　4 33 file1<br>　　7 52 file2<br>　　11 11 85 total<pre><code>省略任选项-lcw，wc命令的执行结果与上面一样。</code></pre>解压：<pre><code>sudo tar -zxvf pip-6.0.8.tar.gz
-cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/httpd/access.log</code></pre>删除文件夹：<pre><code>rm -rf /var/log/httpd/access</code></pre>查看指令：<pre><code>1、date —help
-2、man date</code></pre></li>
+<li>wc -L filename 文件里最长的那一行是多少个字。<br>wc命令<br>　　wc命令的功能为统计指定文件中的字节数、字数、行数, 并将统计结果显示输出。<br>　　语法：wc [选项] 文件…<br>　　wc同时也给出所有指定文件的总统计数。字是由空格字符区分开的最大字符串。该命令各选项含义如下：<br>　　- c 统计字节数。<br>　　- l 统计行数。<br>　　- w 统计字数。<br>　　这些选项可以组合使用。输出列的顺序和数目不受选项的顺序和数目的影响。总是按下述顺序显示并且每项最多一列。<br>　　行数、字数、字节数、文件名<br>　　如果命令行中没有文件名，则输出中不出现文件名。<br>　　例如：<br>　　$ wc - lcw file1 file2<br>　　4 33 file1<br>　　7 52 file2<br>　　11 11 85 total<pre><code>省略任选项-lcw，wc命令的执行结果与上面一样。
+</code></pre>解压：<pre><code>  sudo tar -zxvf pip-6.0.8.tar.gz
+  cd ~ 返回默认根目录
+</code></pre>删除文件：<pre><code>  rm -f /var/log/httpd/access.log
+</code></pre>删除文件夹：<pre><code>  rm -rf /var/log/httpd/access
+</code></pre>查看指令：<pre><code>  1、date —help
+  2、man date
+</code></pre></li>
 </ul>
 ]]></content>
       <tags>
@@ -196,17 +178,8 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
   <entry>
     <title>python高级编程</title>
     <url>/2020/04/02/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<p>1、filter函数-过滤<br>可以查看下面的例子</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">3</span>,<span class="number">-7</span>,<span class="number">6</span>]</span><br><span class="line">after_filter = map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,filter(<span class="keyword">lambda</span> x:x&gt;<span class="number">0</span>,num))</span><br><span class="line">print(after_filter)</span><br></pre></td></tr></table></figure>
-<p>当然，也可以用python自带的迭代器,可以达到一样的效果</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">after_filter = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>此外，还可以使用生成器</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squre_generator</span><span class="params">(parameter)</span>:</span></span><br><span class="line">    rerurn(x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;parameter)</span><br><span class="line">g = list(squre_generator(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-
-<p>2、装饰器<br>装饰器为我们提供了一个增加已有函数或类的功能。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timethis</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">   @wraps(func)</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args,**kwargs)</span>:</span></span><br><span class="line">      start = time.time()</span><br><span class="line">      result = func(*args,**kwargs)</span><br><span class="line">      end = time.time()</span><br><span class="line">      print(func.__name__,end-start)</span><br><span class="line">      <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timethis</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countdown</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">    n-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">countdown(<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
-
+    <content><![CDATA[<p>1、filter函数-过滤<br>可以查看下面的例子<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">3</span>,<span class="number">-7</span>,<span class="number">6</span>]</span><br><span class="line">after_filter = map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,filter(<span class="keyword">lambda</span> x:x&gt;<span class="number">0</span>,num))</span><br><span class="line">print(after_filter)</span><br></pre></td></tr></table></figure><br>当然，也可以用python自带的迭代器,可以达到一样的效果<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">after_filter = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure><br><a id="more"></a><br>此外，还可以使用生成器<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squre_generator</span><span class="params">(parameter)</span>:</span></span><br><span class="line">    rerurn(x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;parameter)</span><br><span class="line">g = list(squre_generator(<span class="number">0</span>))</span><br></pre></td></tr></table></figure></p>
+<p>2、装饰器<br>装饰器为我们提供了一个增加已有函数或类的功能。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timethis</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">   @wraps(func)</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args,**kwargs)</span>:</span></span><br><span class="line">      start = time.time()</span><br><span class="line">      result = func(*args,**kwargs)</span><br><span class="line">      end = time.time()</span><br><span class="line">      print(func.__name__,end-start)</span><br><span class="line">      <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timethis</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countdown</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">    n-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">countdown(<span class="number">10000</span>)</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <tags>
         <tag>编程</tag>
@@ -216,9 +189,7 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
   <entry>
     <title>向左走，向右走</title>
     <url>/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/</url>
-    <content><![CDATA[<p>很喜欢台湾作家几米画的单行本漫画《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。</p>
-<a id="more"></a>
-<p>书中描绘着，在一座陌生的城市中，寂寞孤独的一对男女因为偶然一次缘分在公园相遇，互诉衷肠，两个落寞的心彼此感受着对方的温暖。然而，天空开始下着暴雨，俩人不得不分开，在临别前女生给男生留下写着电话的字条，就各自匆忙回家。不幸的是，字条由于雨水打湿而模糊了字迹，辨认不出号码。女生就这么焦急地等待男生的电话，而男生由于打湿字条而懊悔，满怀希望去公园等待，每次只能失望而归。时间缓缓流逝，又回到当初孤生一人的状态，生活仿佛又恢复了平静，只有他们自己知道，他们的心结了厚厚一层霜。生活在同个城市，两人有很多次机会相遇，但一人习惯向左，一人习惯向右，总是插肩而过，仿佛命运给他们开了无情的玩笑，注定无法相遇。又过了一段时间，女生打算离开这个让她伤心的城市。女生早早起床，把行李收拾好，打算在日出来临之时逃离这座城市，恰好遇上同样外出的男生。这一次，命运开始重新眷顾他们，在最重要的时刻他们重新相遇，那一刻，初升的阳光温柔地打在他们身上，暖暖的，融化了心里的霜。<br><img src="/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/left.jpg" alt="漫画图"><br>这本书其实带给我很深的感动。以前在学校，身边总是围绕着很多东西，心里不觉得孤单，但等我真正走出社会，我才发现，在这钢筋水泥包裹着的城市，心慢慢开始学会忍受孤独。慢慢地开始习惯一个人，习惯一个人吃饭、一个人逛街、一个人看电影，一个人学会忍受孤独，内心开始慢慢封闭，终于我们会发现原来一个人也会慢慢习惯。</p>
+    <content><![CDATA[<p>很喜欢台湾作家几米画的单行本漫画《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。<br><a id="more"></a><br>书中描绘着，在一座陌生的城市中，寂寞孤独的一对男女因为偶然一次缘分在公园相遇，互诉衷肠，两个落寞的心彼此感受着对方的温暖。然而，天空开始下着暴雨，俩人不得不分开，在临别前女生给男生留下写着电话的字条，就各自匆忙回家。不幸的是，字条由于雨水打湿而模糊了字迹，辨认不出号码。女生就这么焦急地等待男生的电话，而男生由于打湿字条而懊悔，满怀希望去公园等待，每次只能失望而归。时间缓缓流逝，又回到当初孤生一人的状态，生活仿佛又恢复了平静，只有他们自己知道，他们的心结了厚厚一层霜。生活在同个城市，两人有很多次机会相遇，但一人习惯向左，一人习惯向右，总是插肩而过，仿佛命运给他们开了无情的玩笑，注定无法相遇。又过了一段时间，女生打算离开这个让她伤心的城市。女生早早起床，把行李收拾好，打算在日出来临之时逃离这座城市，恰好遇上同样外出的男生。这一次，命运开始重新眷顾他们，在最重要的时刻他们重新相遇，那一刻，初升的阳光温柔地打在他们身上，暖暖的，融化了心里的霜。<br><img src="/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/left.jpg" alt="漫画图"><br>这本书其实带给我很深的感动。以前在学校，身边总是围绕着很多东西，心里不觉得孤单，但等我真正走出社会，我才发现，在这钢筋水泥包裹着的城市，心慢慢开始学会忍受孤独。慢慢地开始习惯一个人，习惯一个人吃饭、一个人逛街、一个人看电影，一个人学会忍受孤独，内心开始慢慢封闭，终于我们会发现原来一个人也会慢慢习惯。</p>
 <p>本书带给我的另一个感受是，人的一生会错过许许多多的人，有的人你会跟他相识相知，然后一别再也不见；有的人仅仅是打一个照面，就再也没有出现在你的世界中。每一天我们都在上演这离别戏码，可能是你身边的爱人和家人，也有可能是司机、路人、乘客。每次离别时，我们总以为还有机会再见，下次会有勇气把“我喜欢你”说给心底的那人听，但往往离别之后，再也无法遇见，未说出口的表白成为永久的遗憾。</p>
 <p>一别之后，两地相悬，怎知说那三四载，谁知是一生憾事。</p>
 ]]></content>
@@ -273,23 +244,23 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <a id="more"></a>
 <h2 id="一．机器学习入门篇："><a href="#一．机器学习入门篇：" class="headerlink" title="一．机器学习入门篇："></a>一．机器学习入门篇：</h2><p>1．<a href="https://yq.aliyun.com/articles/67218?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">让你少走弯路：这有一份开展机器学习的简短指南</a></p>
 <p>摘要：本文分享了一份简单的关于开展机器学习的心得体会，目的是给初学者提供基本的指导，主要讲解了建立系统、选择合适的评价指标、数据处理、系统优化等内容，帮助初学者少走一些弯路。</p>
-<ol start="2">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/204352?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习的入门“秘籍”</a></li>
 </ol>
 <p>摘要：机器学习已经成为当下最火热的技术之一，对于初学者来说，如何快速入门机器学习是至关重要的。本文属于入门级宝典，高手请绕道！</p>
-<ol start="3">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/213634?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">会玩超级玛丽，机器学习能有多难?</a></li>
 </ol>
 <p>摘要：小白也能看懂机器学习？这篇文章用超级玛丽的原理教会你，到底什么是机器学习，让尖端科技不再艰深难懂。</p>
-<ol start="4">
+<ol>
 <li>[机器学习能为你的业务做什么？有些事情你肯定猜不到！第一篇](<a href="https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）" target="_blank" rel="noopener">https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）</a></li>
 </ol>
 <p>摘要：机器学习是一项令人难以置信的技术，你需要了解很多很多的基础知识，以使得业务功能尽可能的不受复杂算法的影响，让你能够提出正确的问题、了解机器学习模型开发过程、成立一个团队以促进学科间的不断合作，而不是把数据科学视为一个产生奇迹的黑匣子。</p>
-<ol start="5">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/169190?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于机器学习算法 你需要了解的东西 第二篇</a></li>
 </ol>
 <p>摘要：对学习算法进行分类是基于构建模型时所需的数据：数据是否需要包括输入和输出或仅仅是输入，需要多少个数据点以及何时收集数据。根据上述分类原则，可以分为4个主要的类别：监督学习、无监督学习、半监督学习和强化学习。</p>
-<ol start="6">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/174724?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何开发机器学习模型？第三篇</a></li>
 </ol>
 <p>摘要：创建一个优秀的机器学习模型跟创建其他产品是一样的：首先从构思开始，把要解决的问题和一些潜在的解决方案放在一起考虑。一旦有了明确的方向，就可以对解决方案进行原型化，然后对它进行测试以确定是否满足需求，不妨看看本文是如何一步一步实现的。</p>
@@ -297,23 +268,23 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <p>摘要: 一个“传统”的产品团队由设计师、工程师和产品经理组成，而数据分析师有时也会包含在其中，但大多数情况下是多个团队共享这个稀缺资源。在机器学习团队中又会有哪些角色和组织结构呢，本文为你揭晓。</p>
 <p>8.<a href="https://yq.aliyun.com/articles/178357?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习会产生哪些用户体验问题？第五篇</a></p>
 <p>摘要：许多机器学习算法都是黑匣子：输入大量的数据，然后获得一个以某种神秘方式工作的模型。这使得很难向用户解释机器学习的结果。在许多算法中，还存在着交互效应，这使得模型更加难以解释了。你可以把这个看成是特征之间的复合效应，特征之间以多种奇怪而又复杂并且不为人类所理解的方式结合在一起，整体效应大于各个部分效应。</p>
-<ol start="9">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/67165?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——引言 (Part I)</a></li>
 </ol>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第一部分，主要介绍学习机器学习的动机及基本理论知识，详细介绍机器学习所学习的问题、泛化误差以及学习问题是否可解的公式化表示，为初步研究机器学习的人员介绍了机器学习的基本处理过程。</p>
-<ol start="10">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/67168?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论—— 泛化界限 (Part II )</a></li>
 </ol>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第二部分，主要介绍独立同分布、大数法则及hoeffding不等式等基本数学知识，详细推导了泛化界限及其分解。</p>
-<ol start="11">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/67170?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——正则化和偏置方差的权衡 (Part III )</a></li>
 </ol>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第三部分，主要介绍方差分解以及目标函数的正则化，通过仿真可以看到，引入正则化项限定了学习问题的解决方案范围。</p>
-<ol start="12">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/78023?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">入门级攻略：机器学习 VS. 深度学习</a></li>
 </ol>
 <p>摘要：本文以浅显易懂的语言介绍了机器学习和深度学习的定义及应用，以及在源数据要求，硬件支持，特征工程、问题解决方式、执行时间及可解释性等方面的区别，对于新手入门有很大启示意义。</p>
-<ol start="13">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/200980?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">增强学习小白？本文带你入门了解增强学习</a></li>
 </ol>
 <p>摘要：入门一件新事物总是会有些无从下手的，看了本文希望可以给大家一些帮助和了解。</p>
@@ -321,15 +292,15 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <p>摘要：机器学习是个跨领域的学科，而且在实际应用中有巨大作用，但是没有一本书能让你成为机器学习的专家。在这篇文章中，我挑选了10本书，这些书有不同的风格，主题也不尽相同，出版时间也不一样。因此，无论你是新手还是领域专家，定能找到适合你的。</p>
 <p>15.<a href="https://yq.aliyun.com/articles/64929?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">想知道机器学习掌握的怎么样了吗？这有一份自测题（附答案和解析）</a></p>
 <p>摘要：人类对于自动化和智能化的追求一直推动着技术的进步，而机器学习这类型的技术对各个领域都起到了巨大的作用。随着时间的推移我们将看到机器学习无处不在从移动个人助理到电子商务网站的推荐系统。即使作为一个外行你也不能忽视机器学习对你生活的影响。本次测试时面向对机器学习有一定了解的人。</p>
-<ol start="16">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/222864?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">送机器学习电子书——(TensorFlow)RNN入门</a></li>
 </ol>
 <p>摘要：本文作者正在写自己的新书Machine Learning with TensorFlow，这篇博文只是他新书的一小部分，作者用简单的语言介绍了RNN，不用一个小例子介绍了如何使用Tensorflow中内置的RNN模型进行预测。</p>
-<ol start="17">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/221708?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">适合入门的8个趣味机器学习项目</a></li>
 </ol>
 <p>摘要：还在为找不到机器学习入门练手项目而感到无奈吗？本指南中，将给大家带来8个适合初学者学习的有趣的机器学习项目，简单易学，相信会增添大家学习机器学习的信心。</p>
-<ol start="18">
+<ol>
 <li><a href="https://yq.aliyun.com/articles/222434?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习快速入门：你必须知道的三大算法</a></li>
 </ol>
 <p>摘要：每天霸占新闻头条的“机器学习”，想入门，先看懂这三大算法。</p>
@@ -403,7 +374,7 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <p>摘要：本文展示了针对Flappy Bird游戏设计的机器学习算法。本实验的目标是使用神经网络和遗传算法编写一个人工智能游戏控制器，打出游戏最高分，不服的来挑战！</p>
 <p>8.教机器写代码：增强拓扑进化网络(NEAT)</p>
 <p>摘要：NEAT的意思是“增强拓扑进化网络”，它描述了在进化过程中受遗传修饰启发的自学习机器的算法概念，不妨看看它是如何教机器写代码的。</p>
-<ol start="9">
+<ol>
 <li>机器学习中，使用Scikit-Learn简单处理文本数据</li>
 </ol>
 <p>摘要：机器学习中，我们总是要先将源数据处理成符合模型算法输入的形式，比如将文字、声音、图像转化成矩阵。对于文本数据首先要进行分词（tokenization），移除停止词（stop words），然后将词语转化成矩阵形式，然后再输入机器学习模型中，这个过程称为特征提取（feature extraction）或者向量化（vectorization）。</p>
@@ -427,7 +398,7 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <p>摘要：无监督学习是人工智能时代核心技术，今天我们就来盘点一下2017上半年无监督学习出现了那些重要的研究成果。</p>
 <p>10.有监督相似性学习：基于相似问题数据的对称关系学习</p>
 <p>摘要：本文简单介绍基于相似问题数据的对称关系学习，通过在Quora数据集和StackExchange语料库上应用孪生卷积神经网络的结果表明，对称网络能够较大幅度地提高检测精度。</p>
-<ol start="11">
+<ol>
 <li>应用机器学习：传道解惑指南</li>
 </ol>
 <p>摘要：本文作者编辑了一份包括概念、定义、资源以及工具的知识合集，这对于在这个复杂领域从事工作的人来说非常有用。</p>
@@ -442,7 +413,7 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
     <title>FRM-之信用风险管理</title>
     <url>/2020/03/03/FRM-%E4%B9%8B%E4%BF%A1%E7%94%A8%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<p><strong>信用风险管理笔记</strong></p>
-<h2 id="信用决定"><a href="#信用决定" class="headerlink" title="信用决定"></a>信用决定</h2><p>the probability of Default(PD)，the loss given default(LGD)，the exposure at default(EAD)<br>the overall expected loss(EL)<br>expected loss(EL) = PD * LGD * EL<br>Time horizon：时间窗口</p>
+<h2 id="信用决定"><a href="#信用决定" class="headerlink" title="信用决定"></a>信用决定</h2><p>the probability of Default(PD)，the loss given default(LGD)，the exposure at default(EAD)<br>the overall expected loss(EL)<br>expected loss(EL) = PD <em> LGD </em> EL<br>Time horizon：时间窗口</p>
 <p>交易风险：</p>
 <ul>
 <li>settlement risk 交割风险</li>
@@ -454,7 +425,7 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
 <li>定量分析：historical nature of the data</li>
 </ul>
 <a id="more"></a>
-<h2 id="信用分析"><a href="#信用分析" class="headerlink" title="信用分析"></a>信用分析</h2><h2 id="信用风险的分类和主要概念"><a href="#信用风险的分类和主要概念" class="headerlink" title="信用风险的分类和主要概念"></a>信用风险的分类和主要概念</h2><h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2><h2 id="信用风险和信用衍生品"><a href="#信用风险和信用衍生品" class="headerlink" title="信用风险和信用衍生品"></a>信用风险和信用衍生品</h2><h2 id="结构信用风险"><a href="#结构信用风险" class="headerlink" title="结构信用风险"></a>结构信用风险</h2><h2 id="对手方风险"><a href="#对手方风险" class="headerlink" title="对手方风险"></a>对手方风险</h2><h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
+<h2 id="信用分析"><a href="#信用分析" class="headerlink" title="信用分析"></a>信用分析</h2><h2 id="信用风险的分类和主要概念"><a href="#信用风险的分类和主要概念" class="headerlink" title="信用风险的分类和主要概念"></a>信用风险的分类和主要概念</h2><h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2><h2 id="信用风险和信用衍生品"><a href="#信用风险和信用衍生品" class="headerlink" title="信用风险和信用衍生品"></a>信用风险和信用衍生品</h2><h2 id="结构信用风险"><a href="#结构信用风险" class="headerlink" title="结构信用风险"></a>结构信用风险</h2><h2 id="对手方风险"><a href="#对手方风险" class="headerlink" title="对手方风险"></a>对手方风险</h2><h2 id><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
       <categories>
         <category>FRM二级</category>
       </categories>
@@ -467,17 +438,13 @@ cd ~ 返回默认根目录</code></pre>删除文件：<pre><code>rm -f /var/log/
     <url>/2020/03/01/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <a id="more"></a>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
       <categories>

@@ -232,16 +232,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>小表join大表原则；<br>Hive中的常用基本数据类型：<br>数据类型<br>长度<br>备注<br>Tinyint<br>1字节的有符号整数<br>-128<del>127<br>SmallInt<br>1个字节的有符号整数<br>-32768</del>32767<br>Int<br>4个字节的有符号整数<br>-2147483648 ~ 2147483647<br>BigInt<br>8个字节的有符号整数 </p>
+          <p>小表join大表原则；<br>Hive中的常用基本数据类型：<br>数据类型<br>长度<br>备注<br>Tinyint<br>1字节的有符号整数<br>-128~127<br>SmallInt<br>1个字节的有符号整数<br>-32768~32767<br>Int<br>4个字节的有符号整数<br>-2147483648 ~ 2147483647<br>BigInt<br>8个字节的有符号整数 </p>
 <p>Boolean<br>布尔类型，true或者false<br>true、false<br>Float<br>单精度浮点数 </p>
 <p>Double<br>双精度浮点数 </p>
 <p>String<br>字符串 </p>
 <p>TimeStamp<br>整数<br>支持Unix timestamp，可以达到纳秒精度<br>Binary<br>字节数组 </p>
-<p>Date<br>日期<br>0000-01-01 ~ 9999-12-31，常用String代替 </p>
-<hr>
-<hr>
-<hr>
-<p>创建数据库例子：<br>hive&gt; create database if not exists user_db;</p>
+<p>Date<br>日期 </p>
+<h2 id="0000-01-01-9999-12-31，常用String代替"><a href="#0000-01-01-9999-12-31，常用String代替" class="headerlink" title="0000-01-01 ~ 9999-12-31，常用String代替 "></a>0000-01-01 ~ 9999-12-31，常用String代替 </h2><h2 id="—"><a href="#—" class="headerlink" title="—- "></a>—- </h2><p>创建数据库例子：<br>hive&gt; create database if not exists user_db;</p>
 <p>查看数据库定义：<br>hive&gt; describe database user_db;</p>
 <p>查看数据库列表：<br>hive&gt; show databases; </p>
 <p>删除数据库：<br>hive&gt; drop database if exists testdb cascade;</p>
@@ -261,7 +258,7 @@
 <p>插入数据的表是分区表：<br>insert overwrite table user_leads PARTITION (dt=’2017-05-26’)<br>select * from  user_leads_tmp;</p>
 <p>复制表：<br>create table user_leads_bak<br>row format delimited fields terminated by ‘\t’<br>stored as textfile<br>as<br>select leads_id,user_id,’2016-08-22’ as bakdate<br>from user_leads<br>where create_time&lt;’2016-08-22’;</p>
 <p>克隆表：<br>——克隆表时会克隆源表的所有元数据信息，但是不会复制源表的数据<br>create table user_leads_like like  user_leads;</p>
-<p>Where筛选：<br>操作符<br>说明<br>操作符<br>说明<br>A=B<br>A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B<br>都为Null则返回True，其他和=一样<br>A&lt;&gt;B<br>不等于<br>A!=B<br>不等于<br>A&lt;B<br>小于<br>A&lt;=B<br>小于等于<br>A&gt;B<br>大于<br>A&gt;=B<br>大于等于<br>A Between B And C<br>筛选A的值处于B和C之间<br>A Not Between B And C<br>筛选A的值不处于B和C之间<br>A Is NULL<br>筛选A是NULL的<br>A Is Not NULL<br>筛选A值不是NULL的<br>A Link B<br>%一个或者多个字符_一个字符<br>A Not Like B<br>%一个或者多个字符_一个字符<br>A RLike B<br>正则匹配 </p>
+<p>Where筛选：<br>操作符<br>说明<br>操作符<br>说明<br>A=B<br>A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B<br>都为Null则返回True，其他和=一样<br>A&lt;&gt;B<br>不等于<br>A!=B<br>不等于<br>A<B 小于 a<="B" 小于等于 a>B<br>大于<br>A&gt;=B<br>大于等于<br>A Between B And C<br>筛选A的值处于B和C之间<br>A Not Between B And C<br>筛选A的值不处于B和C之间<br>A Is NULL<br>筛选A是NULL的<br>A Is Not NULL<br>筛选A值不是NULL的<br>A Link B<br>%一个或者多个字符<em>一个字符<br>A Not Like B<br>%一个或者多个字符</em>一个字符<br>A RLike B<br>正则匹配 </B></p>
 <p>排序：</p>
 <p>Sort By：<br>——Hive中尽量不要用Order By，除非非常确定结果集很小<br>select * from user_leads sort by user_id</p>
 <p>日期函数：</p>
@@ -338,44 +335,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>$# 是传给脚本的参数个数<br>$0 是脚本本身的名字<br>$1 是传递给该shell脚本的第一个参数<br>$2 是传递给该shell脚本的第二个参数<br>$@ 是传给脚本的所有参数的列表<br>$* 是以一个单字符串显示所有向脚本传递的参数，与位置变量不同，参数可超过9个<br>$$ 是脚本运行的当前进程ID号<br>$? 是显示最后命令的退出状态，0表示没有错误，其他表示有错误</p>
-<p>1、if-then语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if test command</span><br><span class="line">then commands</span><br><span class="line">else commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
+          <p>$# 是传给脚本的参数个数<br>$0 是脚本本身的名字<br>$1 是传递给该shell脚本的第一个参数<br>$2 是传递给该shell脚本的第二个参数<br>$@ 是传给脚本的所有参数的列表<br>$* 是以一个单字符串显示所有向脚本传递的参数，与位置变量不同，参数可超过9个</p>
+<p>$$ 是脚本运行的当前进程ID号<br>$? 是显示最后命令的退出状态，0表示没有错误，其他表示有错误</p>
+<p>1、if-then语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if test command</span><br><span class="line">then commands</span><br><span class="line">else commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
 <p>test检测：<br>数字<br>n1 -eq n2     检查n1是否与n2相等<br>n1 -ge n2     检查n1是否大于或等于n2<br>n1 -gt n2     检查n1是否大于n2<br>n1 -le n2     检查n1是否小于或等于n2<br>n1 -lt n2     检查n1是否小于n2<br>n1 -ne n2     检查n1是否不等于n2</p>
 <p>字符串<br>-n str1       检查str1的长度是否非0<br>-z str1       检查str1的长度是否为0</p>
-<p>2、for循环</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in list do</span><br><span class="line">commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file&#x3D;“states”</span><br><span class="line">IFS&#x3D;$&#39;\n’   #能读空行的值</span><br><span class="line">for state in $(cat $file)</span><br><span class="line">do</span><br><span class="line">   echo &quot;Visit beautiful $state&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
+<p>2、for循环<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in list do</span><br><span class="line">commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file&#x3D;“states”</span><br><span class="line">IFS&#x3D;$&#39;\n’   #能读空行的值</span><br><span class="line">for state in $(cat $file)</span><br><span class="line">do</span><br><span class="line">   echo &quot;Visit beautiful $state&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
 <p>跳出循环：break、continue</p>
-<p>3、创建函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function name &#123; commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>高级函数<br>4、sed命令<br>Sed编辑器被称为流编辑器，与普通的交互式文本编辑器想法。<br>1）在命令行定义编辑器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Echo “this is a test” | sed ’s&#x2F;test&#x2F;big test’</span><br></pre></td></tr></table></figure>
-<p>This is a big test<br>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed ’s&#x2F;dog&#x2F;cat&#x2F;‘ data.txt</span><br></pre></td></tr></table></figure>
-<p>Sed编辑器并不会修改文本文件的数据</p>
-<p>2）在命令行使用多个编辑器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed -e ’s&#x2F;brown&#x2F;green&#x2F;; s&#x2F;dog&#x2F;cat’ data.txt</span><br></pre></td></tr></table></figure>
-<p> 必须要用；分割</p>
-<p>3）从文件中读取编辑器命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed -f script1.sed datat.txt</span><br></pre></td></tr></table></figure>
-
-<p>4）写入文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed ‘1,2w test.txt’ datat.txt</span><br></pre></td></tr></table></figure>
-<p>将test.txt文件的前两行打印到data.txt文件中</p>
+<p>3、创建函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function name &#123; commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>高级函数<br>4、sed命令<br>Sed编辑器被称为流编辑器，与普通的交互式文本编辑器想法。<br>1）在命令行定义编辑器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ Echo “this is a test” | sed ’s&#x2F;test&#x2F;big test’</span><br></pre></td></tr></table></figure><br>This is a big test<br>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed ’s&#x2F;dog&#x2F;cat&#x2F;‘ data.txt</span><br></pre></td></tr></table></figure><br>Sed编辑器并不会修改文本文件的数据</p>
+<p>2）在命令行使用多个编辑器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed -e ’s&#x2F;brown&#x2F;green&#x2F;; s&#x2F;dog&#x2F;cat’ data.txt</span><br></pre></td></tr></table></figure><br> 必须要用；分割</p>
+<p>3）从文件中读取编辑器命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed -f script1.sed datat.txt</span><br></pre></td></tr></table></figure></p>
+<p>4）写入文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sed ‘1,2w test.txt’ datat.txt</span><br></pre></td></tr></table></figure><br>将test.txt文件的前两行打印到data.txt文件中</p>
 <p>5、awk命令</p>
-<p>1）格式化输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123;printf &quot;%-8s %-10s\n&quot;,$1,$4&#125;&#39; log.txt</span><br></pre></td></tr></table></figure>
-
-<p>2）使用，分割</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;BEGIN&#123;FS&#x3D;&quot;,&quot;&#125; &#123;print $1,$2&#125;&#39;  log.txt</span><br></pre></td></tr></table></figure>
-
-<p>3）条件语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;BEGIN &#123;</span><br><span class="line">    num &#x3D; 11; </span><br><span class="line">    if (num % 2 &#x3D;&#x3D; 0) printf &quot;%d 是偶数\n&quot;, num; </span><br><span class="line">    else printf &quot;%d 是奇数\n&quot;, num </span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
+<p>1）格式化输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123;printf &quot;%-8s %-10s\n&quot;,$1,$4&#125;&#39; log.txt</span><br></pre></td></tr></table></figure></p>
+<p>2）使用，分割<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;BEGIN&#123;FS&#x3D;&quot;,&quot;&#125; &#123;print $1,$2&#125;&#39;  log.txt</span><br></pre></td></tr></table></figure></p>
+<p>3）条件语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;BEGIN &#123;</span><br><span class="line">    num &#x3D; 11; </span><br><span class="line">    if (num % 2 &#x3D;&#x3D; 0) printf &quot;%d 是偶数\n&quot;, num; </span><br><span class="line">    else printf &quot;%d 是奇数\n&quot;, num </span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -542,7 +517,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-06 23:48:34" itemprop="dateModified" datetime="2020-04-06T23:48:34+08:00">2020-04-06</time>
+                <time title="修改时间：2020-04-18 20:53:12" itemprop="dateModified" datetime="2020-04-18T20:53:12+08:00">2020-04-18</time>
               </span>
 
           
@@ -556,7 +531,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>评分卡又称A卡，在金融领域，尤其是银行利用最多的模型，经常运用到贷前准入环节。它具有可解释性，模型稳定等各种优势。</p>
+          <p>评分卡又称A卡，在金融领域，尤其是银行利用最多的模型，经常运用到贷前准入环节。它具有可解释性，模型稳定等各种优势。<br></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/05/%E8%AF%84%E5%88%86%E5%8D%A1/#more" rel="contents">
@@ -622,7 +597,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>一，注销，关机，重启<br>1、Logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达<br>logout 命令即可：<br>2、关机或重新启动的 shutdown 命令：<br>    －h 参数让系统立即关机<br>        shutdown –h now ← 要求系统立即关机；<br>        shutdown now ← 立刻关机；<br>        shutdown +5 ← 5 分钟后关机；<br>        shutdown 10:30 ← 在 10：30 时关机；<br>    －r 参数设置关机后重新启动<br>        shutdown -r now ← 立刻关闭系统并重启；<br>        shutdown -r 23:59 ← 指定在 23：59 时重启动；</p>
+          <p>一，注销，关机，重启<br>1、Logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达<br>logout 命令即可：<br>2、关机或重新启动的 shutdown 命令：<br>    －h 参数让系统立即关机<br>        shutdown –h now ← 要求系统立即关机；<br>        shutdown now ← 立刻关机；<br>        shutdown +5 ← 5 分钟后关机；<br>        shutdown 10:30 ← 在 10：30 时关机；<br>    －r 参数设置关机后重新启动<br>        shutdown -r now ← 立刻关闭系统并重启；<br>        shutdown -r 23:59 ← 指定在 23：59 时重启动；<br></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/05/Linux%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/#more" rel="contents">
@@ -694,10 +669,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>1、filter函数-过滤<br>可以查看下面的例子</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">3</span>,<span class="number">-7</span>,<span class="number">6</span>]</span><br><span class="line">after_filter = map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,filter(<span class="keyword">lambda</span> x:x&gt;<span class="number">0</span>,num))</span><br><span class="line">print(after_filter)</span><br></pre></td></tr></table></figure>
-<p>当然，也可以用python自带的迭代器,可以达到一样的效果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after_filter = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+          <p>1、filter函数-过滤<br>可以查看下面的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">3</span>,<span class="number">-7</span>,<span class="number">6</span>]</span><br><span class="line">after_filter = map(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,filter(<span class="keyword">lambda</span> x:x&gt;<span class="number">0</span>,num))</span><br><span class="line">print(after_filter)</span><br></pre></td></tr></table></figure><br>当然，也可以用python自带的迭代器,可以达到一样的效果<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after_filter = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> num <span class="keyword">if</span> x&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure><br></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/02/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/#more" rel="contents">
@@ -769,7 +741,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>很喜欢台湾作家几米画的单行本漫画《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。</p>
+          <p>很喜欢台湾作家几米画的单行本漫画《向左走，向右走》，文字中处处透露着温暖，插画清新自然，很舒服。<br></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/30/%E5%90%91%E5%B7%A6%E8%B5%B0%EF%BC%8C%E5%90%91%E5%8F%B3%E8%B5%B0/#more" rel="contents">

@@ -3,8 +3,8 @@
   <entry>
     <title>Hive操作</title>
     <url>/2020/04/18/Hive%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h2 id="小表join大表原则；"><a href="#小表join大表原则；" class="headerlink" title="小表join大表原则；"></a>小表join大表原则；</h2><p>Hive中的常用基本数据类型：<br>数据类型 长度 备注<br><a id="more"></a><br>Tinyint 1字节的有符号整数 -128~127<br>SmallInt 1个字节的有符号整数 -32768~32767<br>Int 4个字节的有符号整数 -2147483648 ~ 2147483647<br>BigInt 8个字节的有符号整数<br>Boolean 布尔类型，true或者false true、false<br>Float 单精度浮点数<br>Double 双精度浮点数<br>String 字符串<br>TimeStamp 整数 支持Unix timestamp，可以达到纳秒精度<br>Binary 字节数组<br>Date 日期 0000-01-01 ~ 9999-12-31，常用String代替 </p>
-<h2 id="具体语法"><a href="#具体语法" class="headerlink" title="具体语法"></a>具体语法</h2><p>创建数据库例子：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; create database if not exists user_db;</span><br></pre></td></tr></table></figure><br>查看数据库定义：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; describe database user_db;</span><br></pre></td></tr></table></figure><br>查看数据库列表：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; show databases;</span><br></pre></td></tr></table></figure><br>删除数据库：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; drop database if exists testdb cascade;</span><br></pre></td></tr></table></figure><br>切换当前数据库：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; use user_db;</span><br></pre></td></tr></table></figure></p>
+    <content><![CDATA[<h1 id="1、小表join大表原则；"><a href="#1、小表join大表原则；" class="headerlink" title="1、小表join大表原则；"></a>1、小表join大表原则；</h1><p>Hive中的常用基本数据类型：<br>数据类型 | 长度 | 备注<br>-|-|-<br>Tinyint | 1字节的有符号整数 | -128~127<br>SmallInt | 1个字节的有符号整数 | -32768~32767<br>Int | 4个字节的有符号整数 | -2147483648 ~ 2147483647<br>BigInt | 8个字节的有符号整数<br>Boolean | 布尔类型，true或者false true、false<br>Float | 单精度浮点数<br>Double | 双精度浮点数<br>String | 字符串<br>TimeStamp | 整数 | 支持Unix timestamp，可以达到纳秒精度<br>Binary | 字节数组<br>Date | 日期 | 0000-01-01 ~ 9999-12-31，常用String代替<br><a id="more"></a></p>
+<h1 id="2、具体语法"><a href="#2、具体语法" class="headerlink" title="2、具体语法"></a>2、具体语法</h1><p>创建数据库例子：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; create database if not exists user_db;</span><br></pre></td></tr></table></figure><br>查看数据库定义：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; describe database user_db;</span><br></pre></td></tr></table></figure><br>查看数据库列表：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; show databases;</span><br></pre></td></tr></table></figure><br>删除数据库：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; drop database if exists testdb cascade;</span><br></pre></td></tr></table></figure><br>切换当前数据库：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; use user_db;</span><br></pre></td></tr></table></figure></p>
 <p>创建普通表：<br>1)第一种<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; create table if not exists userinfo  </span><br><span class="line">    (</span><br><span class="line">    userid int,</span><br><span class="line">    username string,</span><br><span class="line">    cityid int,</span><br><span class="line">    createtime date    </span><br><span class="line">    )</span><br><span class="line">    row format delimited fields terminated by &#39;\t&#39;</span><br><span class="line">    stored as textfile;</span><br></pre></td></tr></table></figure><br>row format delimited fields terminated by ‘\t’ 是指定列之间的分隔符；stored as textfile是指定文件存储格式为textfile。</p>
 <p>2）第二种<br>create table as select 方式：根据查询的结果自动创建表，并将查询结果数据插入新建的表中。</p>
 <p>3）第三种<br>create table like tablename1 方式：是克隆表，只复制tablename1表的结构。复制表和克隆表会在下面的Hive数据管理部分详细讲解。</p>
@@ -23,13 +23,13 @@
 <p>插入数据的表是分区表：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert overwrite table user_leads PARTITION (dt&#x3D;&#39;2017-05-26&#39;) </span><br><span class="line">select * from  user_leads_tmp;</span><br></pre></td></tr></table></figure></p>
 <p>复制表：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table user_leads_bak</span><br><span class="line">row format delimited fields terminated by &#39;\t&#39;</span><br><span class="line">stored as textfile</span><br><span class="line">as</span><br><span class="line">select leads_id,user_id,&#39;2016-08-22&#39; as bakdate</span><br><span class="line">from user_leads</span><br><span class="line">where create_time&lt;&#39;2016-08-22’;</span><br></pre></td></tr></table></figure></p>
 <p>克隆表：<br>——克隆表时会克隆源表的所有元数据信息，但是不会复制源表的数据<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table user_leads_like like  user_leads;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Where筛选："><a href="#Where筛选：" class="headerlink" title="Where筛选："></a>Where筛选：</h2><p>操作符 说明<br>A=B   A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B   都为Null则返回True，其他和=一样<br>A&lt;&gt;B   不等于<br>A!=B   不等于<br>A<B 小于 a<="B" 小于等于 a>B   大于<br>A&gt;=B   大于等于<br>A Between B And C   筛选A的值处于B和C之间<br>A Not Between B And C   筛选A的值不处于B和C之间<br>A Is NULL   筛选A是NULL的<br>A Is Not NULL   筛选A值不是NULL的<br>A Link B   %一个或者多个字符_一个字符<br>A Not Like B   %一个或者多个字符_一个字符<br>A RLike B   正则匹配 </B></p>
-<h2 id="排序："><a href="#排序：" class="headerlink" title="排序："></a>排序：</h2><p>Sort By：<br>——Hive中尽量不要用Order By，除非非常确定结果集很小<br>select * from user_leads sort by user_id</p>
+<h1 id="3、Where筛选："><a href="#3、Where筛选：" class="headerlink" title="3、Where筛选："></a>3、Where筛选：</h1><p>操作符 说明<br>A=B   A等于B就返回true，适用于各种基本类型<br>A&lt;=&gt;B   都为Null则返回True，其他和=一样<br>A&lt;&gt;B   不等于<br>A!=B   不等于<br>A<B 小于 a<="B" 小于等于 a>B   大于<br>A&gt;=B   大于等于<br>A Between B And C   筛选A的值处于B和C之间<br>A Not Between B And C   筛选A的值不处于B和C之间<br>A Is NULL   筛选A是NULL的<br>A Is Not NULL   筛选A值不是NULL的<br>A Link B   %一个或者多个字符_一个字符<br>A Not Like B   %一个或者多个字符_一个字符<br>A RLike B   正则匹配 </B></p>
+<h1 id="4、排序："><a href="#4、排序：" class="headerlink" title="4、排序："></a>4、排序：</h1><p>Sort By：<br>——Hive中尽量不要用Order By，除非非常确定结果集很小<br>select * from user_leads sort by user_id</p>
 <p>日期函数：</p>
 <p>1、UNIX时间戳转日期函数：from_unixtime<br>转化UNIX时间戳（从1970-01-01 00:00:00 UTC到指定时间的秒数）到当前时区的时间格式<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select from_unixtime(1323308943,&#39;yyyyMMdd&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
 <p>2、日期时间转日期函数：to_date<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select to_date(&#39;2011-12-08 10:03:01&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure><br>3、日期转年\月\日函数：year——month——day<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select year(&#39;2011-12-08 10:03:01&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure><br>4、日期比较函数：datediff<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select datediff(&#39;2012-12-08&#39;,&#39;2012-05-09&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
 <p>5、日期增加、减少函数：date_add/date_sub<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select date_add(&#39;2012-12-08&#39;,10) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
-<h2 id="字符串函数："><a href="#字符串函数：" class="headerlink" title="字符串函数："></a>字符串函数：</h2><p>1、字符串反转函数：reverse<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select reverse(abcedfg’) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
+<h1 id="5、字符串函数："><a href="#5、字符串函数：" class="headerlink" title="5、字符串函数："></a>5、字符串函数：</h1><p>1、字符串反转函数：reverse<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select reverse(abcedfg’) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
 <p>2、字符串连接函数：concat<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select concat(‘abc’,&#39;def’,&#39;gh’) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
 <p>3、带分隔符连接函数：concat_ws<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select concat_ws(&#39;,&#39;,&#39;abc&#39;,&#39;def&#39;,&#39;gh&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure></p>
 <p>4、字符串截取函数：substr、substring<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select substr(&#39;abcde&#39;,3) from lxw_dual;</span><br></pre></td></tr></table></figure><br>返回字符串A从start位置到结尾的字符串</p>
@@ -207,7 +207,7 @@
 <p>现在的我们工作是为了获取原始的积累，只有足够的原始积累，你才能有资本去做你想做的事情。现在你努力工作是为了更好的明天。别抱怨工作，学会去接受它、喜欢它，或许你也可以在工作上实现你人生的价值。</p>
 <h2 id="3、构建适合自己的投资逻辑"><a href="#3、构建适合自己的投资逻辑" class="headerlink" title="3、构建适合自己的投资逻辑"></a>3、构建适合自己的投资逻辑</h2><p>投资的门派很多，根据金融市场不同可以分为一级市场的PE、VC，和二级市场流通市场；根据产品的不同可以分为债券、股票、汇率、期权、期货等派别；按照投资行为又分为投资者、投机者、套利者。在这纷扰繁杂的金融市场中，要构建属于自己的投资逻辑，随波逐流投资赚的钱，总又一天会以同样的形式流出。</p>
 <h2 id="4、付诸实践，不断试错"><a href="#4、付诸实践，不断试错" class="headerlink" title="4、付诸实践，不断试错"></a>4、付诸实践，不断试错</h2><p>有人说，“年轻人要用于去尝试，不要害怕出错；到老了，犯错误的成本就会很高”。这句话是很有道理的，尤其是在投资界。年轻时，你的资本比较小，亏损了大不了，你还可以重新来过，你还年轻，还有大把的时间可以奋斗，但是当你老了，你已经没有能力或者精力去靠工作赚钱，这时候投资发生损失对于老年生活质量会大大打个折扣。所以，趁年轻，不断去试错，从失败中汲起教训，要么早点认清自己不适合投资，将时间放在更有价值、更合适的地方；要么坚持下去，不断修正自己的投资，完善投资框架，体验投资给你带来的财富增值。</p>
-<p>附我的投资逻辑图：<br><img src="/images/invest.jpg" alt="逻辑图"></p>
+<p>附我的股票投资逻辑图：<br><img src="/2020/03/15/%E6%8A%95%E8%B5%84/invest.jpg" alt="逻辑图"></p>
 ]]></content>
       <tags>
         <tag>股市</tag>
@@ -232,121 +232,94 @@
     <url>/2020/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%BD%AC/</url>
     <content><![CDATA[<p>机器学习是计算机科学的一个子领域，在人工智能领域，机器学习逐渐发展成模式识别和计算科学理论的研究。从2016年起，机器学习到达了不合理的火热巅峰。但是，有效的机器学习是困难的，因为机器学习本身就是一个交叉学科，没有科学的方法及一定的积累很难入门。</p>
 <a id="more"></a>
-<h2 id="一．机器学习入门篇："><a href="#一．机器学习入门篇：" class="headerlink" title="一．机器学习入门篇："></a>一．机器学习入门篇：</h2><p>1．<a href="https://yq.aliyun.com/articles/67218?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">让你少走弯路：这有一份开展机器学习的简短指南</a></p>
+<h2 id="一．机器学习入门篇："><a href="#一．机器学习入门篇：" class="headerlink" title="一．机器学习入门篇："></a>一．机器学习入门篇：</h2><p>1、<a href="https://yq.aliyun.com/articles/67218?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">让你少走弯路：这有一份开展机器学习的简短指南</a></p>
 <p>摘要：本文分享了一份简单的关于开展机器学习的心得体会，目的是给初学者提供基本的指导，主要讲解了建立系统、选择合适的评价指标、数据处理、系统优化等内容，帮助初学者少走一些弯路。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/204352?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习的入门“秘籍”</a></li>
-</ol>
+<p>2、<a href="https://yq.aliyun.com/articles/204352?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习的入门“秘籍”</a></p>
 <p>摘要：机器学习已经成为当下最火热的技术之一，对于初学者来说，如何快速入门机器学习是至关重要的。本文属于入门级宝典，高手请绕道！</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/213634?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">会玩超级玛丽，机器学习能有多难?</a></li>
-</ol>
+<p>3、<a href="https://yq.aliyun.com/articles/213634?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">会玩超级玛丽，机器学习能有多难?</a></p>
 <p>摘要：小白也能看懂机器学习？这篇文章用超级玛丽的原理教会你，到底什么是机器学习，让尖端科技不再艰深难懂。</p>
-<ol>
-<li>[机器学习能为你的业务做什么？有些事情你肯定猜不到！第一篇](<a href="https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）" target="_blank" rel="noopener">https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF）</a></li>
-</ol>
+<p>4、<a href="https://yq.aliyun.com/articles/168744?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习能为你的业务做什么？有些事情你肯定猜不到！第一篇</a></p>
 <p>摘要：机器学习是一项令人难以置信的技术，你需要了解很多很多的基础知识，以使得业务功能尽可能的不受复杂算法的影响，让你能够提出正确的问题、了解机器学习模型开发过程、成立一个团队以促进学科间的不断合作，而不是把数据科学视为一个产生奇迹的黑匣子。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/169190?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于机器学习算法 你需要了解的东西 第二篇</a></li>
-</ol>
+<p>5、<a href="https://yq.aliyun.com/articles/169190?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于机器学习算法 你需要了解的东西 第二篇</a></p>
 <p>摘要：对学习算法进行分类是基于构建模型时所需的数据：数据是否需要包括输入和输出或仅仅是输入，需要多少个数据点以及何时收集数据。根据上述分类原则，可以分为4个主要的类别：监督学习、无监督学习、半监督学习和强化学习。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/174724?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何开发机器学习模型？第三篇</a></li>
-</ol>
+<p>6、<a href="https://yq.aliyun.com/articles/174724?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何开发机器学习模型？第三篇</a></p>
 <p>摘要：创建一个优秀的机器学习模型跟创建其他产品是一样的：首先从构思开始，把要解决的问题和一些潜在的解决方案放在一起考虑。一旦有了明确的方向，就可以对解决方案进行原型化，然后对它进行测试以确定是否满足需求，不妨看看本文是如何一步一步实现的。</p>
-<p>7.<a href="https://yq.aliyun.com/articles/175707?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何高效运作机器学习团队第四篇</a></p>
+<p>7、<a href="https://yq.aliyun.com/articles/175707?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">如何高效运作机器学习团队第四篇</a></p>
 <p>摘要: 一个“传统”的产品团队由设计师、工程师和产品经理组成，而数据分析师有时也会包含在其中，但大多数情况下是多个团队共享这个稀缺资源。在机器学习团队中又会有哪些角色和组织结构呢，本文为你揭晓。</p>
-<p>8.<a href="https://yq.aliyun.com/articles/178357?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习会产生哪些用户体验问题？第五篇</a></p>
+<p>8、<a href="https://yq.aliyun.com/articles/178357?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习会产生哪些用户体验问题？第五篇</a></p>
 <p>摘要：许多机器学习算法都是黑匣子：输入大量的数据，然后获得一个以某种神秘方式工作的模型。这使得很难向用户解释机器学习的结果。在许多算法中，还存在着交互效应，这使得模型更加难以解释了。你可以把这个看成是特征之间的复合效应，特征之间以多种奇怪而又复杂并且不为人类所理解的方式结合在一起，整体效应大于各个部分效应。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/67165?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——引言 (Part I)</a></li>
-</ol>
+<p>9、<a href="https://yq.aliyun.com/articles/67165?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——引言 (Part I)</a></p>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第一部分，主要介绍学习机器学习的动机及基本理论知识，详细介绍机器学习所学习的问题、泛化误差以及学习问题是否可解的公式化表示，为初步研究机器学习的人员介绍了机器学习的基本处理过程。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/67168?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论—— 泛化界限 (Part II )</a></li>
-</ol>
+<p>10、<a href="https://yq.aliyun.com/articles/67168?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论—— 泛化界限 (Part II )</a></p>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第二部分，主要介绍独立同分布、大数法则及hoeffding不等式等基本数学知识，详细推导了泛化界限及其分解。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/67170?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——正则化和偏置方差的权衡 (Part III )</a></li>
-</ol>
+<p>11、<a href="https://yq.aliyun.com/articles/67170?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单自学机器学习理论——正则化和偏置方差的权衡 (Part III )</a></p>
 <p>摘要：本篇文章是”机器学习理论”三部曲中的第三部分，主要介绍方差分解以及目标函数的正则化，通过仿真可以看到，引入正则化项限定了学习问题的解决方案范围。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/78023?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">入门级攻略：机器学习 VS. 深度学习</a></li>
-</ol>
+<p>12、<a href="https://yq.aliyun.com/articles/78023?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">入门级攻略：机器学习 VS. 深度学习</a></p>
 <p>摘要：本文以浅显易懂的语言介绍了机器学习和深度学习的定义及应用，以及在源数据要求，硬件支持，特征工程、问题解决方式、执行时间及可解释性等方面的区别，对于新手入门有很大启示意义。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/200980?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">增强学习小白？本文带你入门了解增强学习</a></li>
-</ol>
+<p>13、<a href="https://yq.aliyun.com/articles/200980?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">增强学习小白？本文带你入门了解增强学习</a></p>
 <p>摘要：入门一件新事物总是会有些无从下手的，看了本文希望可以给大家一些帮助和了解。</p>
-<p>14.<a href="https://yq.aliyun.com/articles/66489?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">这10本由浅入深的好书，或让你成为机器学习领域的专家</a></p>
+<p>14、<a href="https://yq.aliyun.com/articles/66489?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">这10本由浅入深的好书，或让你成为机器学习领域的专家</a></p>
 <p>摘要：机器学习是个跨领域的学科，而且在实际应用中有巨大作用，但是没有一本书能让你成为机器学习的专家。在这篇文章中，我挑选了10本书，这些书有不同的风格，主题也不尽相同，出版时间也不一样。因此，无论你是新手还是领域专家，定能找到适合你的。</p>
-<p>15.<a href="https://yq.aliyun.com/articles/64929?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">想知道机器学习掌握的怎么样了吗？这有一份自测题（附答案和解析）</a></p>
+<p>15、<a href="https://yq.aliyun.com/articles/64929?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">想知道机器学习掌握的怎么样了吗？这有一份自测题（附答案和解析）</a></p>
 <p>摘要：人类对于自动化和智能化的追求一直推动着技术的进步，而机器学习这类型的技术对各个领域都起到了巨大的作用。随着时间的推移我们将看到机器学习无处不在从移动个人助理到电子商务网站的推荐系统。即使作为一个外行你也不能忽视机器学习对你生活的影响。本次测试时面向对机器学习有一定了解的人。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/222864?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">送机器学习电子书——(TensorFlow)RNN入门</a></li>
-</ol>
+<p>16、<a href="https://yq.aliyun.com/articles/222864?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">送机器学习电子书——(TensorFlow)RNN入门</a></p>
 <p>摘要：本文作者正在写自己的新书Machine Learning with TensorFlow，这篇博文只是他新书的一小部分，作者用简单的语言介绍了RNN，不用一个小例子介绍了如何使用Tensorflow中内置的RNN模型进行预测。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/221708?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">适合入门的8个趣味机器学习项目</a></li>
-</ol>
+<p>17、<a href="https://yq.aliyun.com/articles/221708?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">适合入门的8个趣味机器学习项目</a></p>
 <p>摘要：还在为找不到机器学习入门练手项目而感到无奈吗？本指南中，将给大家带来8个适合初学者学习的有趣的机器学习项目，简单易学，相信会增添大家学习机器学习的信心。</p>
-<ol>
-<li><a href="https://yq.aliyun.com/articles/222434?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习快速入门：你必须知道的三大算法</a></li>
-</ol>
+<p>18、<a href="https://yq.aliyun.com/articles/222434?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习快速入门：你必须知道的三大算法</a></p>
 <p>摘要：每天霸占新闻头条的“机器学习”，想入门，先看懂这三大算法。</p>
-<h2 id="二．机器学习算法篇："><a href="#二．机器学习算法篇：" class="headerlink" title="二．机器学习算法篇："></a>二．机器学习算法篇：</h2><p>1.<a href="https://yq.aliyun.com/articles/86632?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">快速选择合适的机器学习算法</a></p>
+<h2 id="二．机器学习算法篇："><a href="#二．机器学习算法篇：" class="headerlink" title="二．机器学习算法篇："></a>二．机器学习算法篇：</h2><p>1、<a href="https://yq.aliyun.com/articles/86632?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">快速选择合适的机器学习算法</a></p>
 <p>摘要：机器学习初学者可以通过本文了解如何快速找到合适的机器学习算法。</p>
-<p>2.<a href="https://yq.aliyun.com/articles/64245?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">多重角度解读：贝叶斯推理是怎么工作的</a></p>
+<p>2、<a href="https://yq.aliyun.com/articles/64245?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">多重角度解读：贝叶斯推理是怎么工作的</a></p>
 <p>摘要：本文首先介绍了贝叶斯的起源，并利用简单的例子生动形象地讲解了贝叶斯定理是如何工作的，解释了其基本原理以及公式的物理含义。</p>
-<p>3.<a href="https://yq.aliyun.com/articles/113512?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单通俗易懂：一个小例子完美解释Naive Bayes（朴素贝叶斯）分类器</a></p>
+<p>3、<a href="https://yq.aliyun.com/articles/113512?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单通俗易懂：一个小例子完美解释Naive Bayes（朴素贝叶斯）分类器</a></p>
 <p>摘要：Naive Bayes分类器的解释有很多，但是基于一个小例子来解释的不多，本文就是基于一个简单通俗易懂的小例子来解释Naive Bayes分类器。</p>
-<p>4.<a href="https://yq.aliyun.com/articles/113511?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">“学”、“习”二合一：监督学习——支持向量机（SVM）入门</a></p>
+<p>4、<a href="https://yq.aliyun.com/articles/113511?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">“学”、“习”二合一：监督学习——支持向量机（SVM）入门</a></p>
 <p>摘要：SVM是机器学习中有监督学习的一种，通常用来进行模式识别、分类、以及回归分析。本文用一个小例子简介SVM，言简意赅，通俗易懂。</p>
-<p>5.<a href="https://yq.aliyun.com/articles/214305?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习利器——决策树和随机森林</a></p>
+<p>5、<a href="https://yq.aliyun.com/articles/214305?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习利器——决策树和随机森林</a></p>
 <p>摘要: 机器学习是当下最火的领域，本文通过一个小例子介绍了其核心算法：决策树和随机森林。</p>
-<p>6.<a href="https://yq.aliyun.com/articles/63053?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">基于图的机器算法 （一）</a></p>
+<p>6、<a href="https://yq.aliyun.com/articles/63053?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">基于图的机器算法 （一）</a></p>
 <p>摘要：基于图的机器算法学习是一个强大的工具。结合运用模块特性，能够在集合检测中发挥更大作用。</p>
-<p>7.<a href="https://yq.aliyun.com/articles/65036?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">基于图的机器算法 （二）</a></p>
+<p>7、<a href="https://yq.aliyun.com/articles/65036?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">基于图的机器算法 （二）</a></p>
 <p>摘要：基于图的机器算法学习是一个强大的工具。结合运用模块特性，能够在集合检测中发挥更大作用。本文是基于图的机器算法系列文的第二篇。</p>
-<p>8.<a href="https://yq.aliyun.com/articles/66987?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单易学！一步步带你理解机器学习算法——马尔可夫链蒙特卡罗（MCMC）</a></p>
+<p>8、<a href="https://yq.aliyun.com/articles/66987?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">简单易学！一步步带你理解机器学习算法——马尔可夫链蒙特卡罗（MCMC）</a></p>
 <p>摘要：对于简单的分布，很多的编程语言都能实现。但对于复杂的分布，是不容易直接抽样的。马尔可夫链蒙特卡罗算法解决了不能通过简单抽样算法进行抽样的问题，是一种实用性很强的抽样算法。本文将简明清晰地讲解马尔可夫链蒙特卡罗算法，带你理解它。</p>
-<p>9.<a href="https://yq.aliyun.com/articles/66794?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">进阶隐式矩阵分解——探讨如何实现更快的算法</a></p>
+<p>9、<a href="https://yq.aliyun.com/articles/66794?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">进阶隐式矩阵分解——探讨如何实现更快的算法</a></p>
 <p>摘要：本文重点是围绕Conjugate Gradient（共轭梯度）方法来探讨更优的矩阵分解算法。</p>
-<p>10.<a href="https://yq.aliyun.com/articles/73484?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">纯干货|机器学习中梯度下降法的分类及对比分析（附源码）</a></p>
+<p>10、<a href="https://yq.aliyun.com/articles/73484?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">纯干货|机器学习中梯度下降法的分类及对比分析（附源码）</a></p>
 <p>摘要：本文详细介绍了基于使用数据量的多少，时间复杂度以及算法准确率的不同类型的梯度下降法，并详细说明了3种梯度下降法的比较。</p>
-<p>11.<a href="https://yq.aliyun.com/articles/68901?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">深度学习网络大杀器之Dropout（I）——深入解析Dropout</a></p>
+<p>11、<a href="https://yq.aliyun.com/articles/68901?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">深度学习网络大杀器之Dropout（I）——深入解析Dropout</a></p>
 <p>摘要：本文详细介绍了深度学习中dropout技巧的思想，分析了Dropout以及Inverted Dropout两个版本，另外将单个神经元与伯努利随机变量相联系让人耳目一新。</p>
-<p>12.<a href="https://yq.aliyun.com/articles/110002?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">深度学习网络大杀器之Dropout（II）——将丢弃学习视为集成学习之我见</a></p>
+<p>12、<a href="https://yq.aliyun.com/articles/110002?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">深度学习网络大杀器之Dropout（II）——将丢弃学习视为集成学习之我见</a></p>
 <p>摘要：本文分析了可以将丢弃学习当作是集成学习。在集成学习中，可以将一个网络划分成若干个子网络，并且单独训练每个子网络。在训练学习后，将每个子网络的输出进行平均得到集成输出。另外，展示了丢弃学习可以看成是在每次迭代中不同隐藏节点集合的集成学习表现，同时也展示了丢弃学习有着与L2正则化一样的效果。</p>
-<p><a href="https://yq.aliyun.com/articles/73661?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">13.神经网络常用激活函数对比：sigmoid VS sofmax（附python源码）</a></p>
+<p>13、<a href="https://yq.aliyun.com/articles/73661?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">神经网络常用激活函数对比：sigmoid VS sofmax（附python源码）</a></p>
 <p>摘要：本文介绍了神经网络中的两种常用激活函数——softmax与sigmoid函数，简单介绍了其基本原理、性质及其使用，并用python进行了实例化演示，在文章的最后总结了两种激活函数的区别。</p>
-<p><a href="https://yq.aliyun.com/articles/72738?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">14.新颖训练方法——用迭代投影算法训练神经网络</a></p>
+<p>14、<a href="https://yq.aliyun.com/articles/72738?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">新颖训练方法——用迭代投影算法训练神经网络</a></p>
 <p>摘要：本文介绍了一种利用迭代投影算法对神经网络进行训练的方法，首先介绍了交替投影的基础知识，说明投影方法是寻找非凸优化问题解决方案的一种有效方法；之后介绍了差异图的基础知识，将差异图与一些其他算法相结合使得差分映射算法能够收敛于一个好的解决方案；当投影的情况变多时，介绍了分治算法，最后将迭代投影算法应用到神经网络训练中，给出的例子实验结果表明效果不错。</p>
-<p><a href="https://yq.aliyun.com/articles/71662?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">15.车辆追踪算法大PK：SVM+HOG vs. YOLO</a></p>
+<p>15、<a href="https://yq.aliyun.com/articles/71662?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">车辆追踪算法大PK：SVM+HOG vs. YOLO</a></p>
 <p>摘要：本文通过SVM+HOG算法，YOLO算法实现车辆检测和跟踪准确性和速度的对比，得出YOLO算法更具优势的结论。</p>
-<p><a href="https://yq.aliyun.com/articles/69263?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">16.什么是视频向量化？本文带你了解基于DeepWalk的视频推荐</a></p>
+<p>16、<a href="https://yq.aliyun.com/articles/69263?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">什么是视频向量化？本文带你了解基于DeepWalk的视频推荐</a></p>
 <p>摘要：本文简要讲述了视频向量化，对DeepWalk的算法进行简单的解释。</p>
-<p><a href="https://yq.aliyun.com/articles/70733?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">17.比PCA降维更高级——（R/Python）t-SNE聚类算法实践指南</a></p>
+<p>17、<a href="https://yq.aliyun.com/articles/70733?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">比PCA降维更高级——（R/Python）t-SNE聚类算法实践指南</a></p>
 <p>摘要: 本文介绍t-SNE聚类算法，分析其基本原理。并从精度上与PCA等其它降维算法进行比较分析，结果表明t-SNE算法更优越，本文最后给出了R、Python实现的示例以及常见问题。t-SNE算法用于自然语音处理、图像处理等领域很有研究前景。</p>
-<p><a href="https://yq.aliyun.com/articles/216164?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">18.随机森林 VS 梯度提升机——模型融合之我见</a></p>
+<p>18、<a href="https://yq.aliyun.com/articles/216164?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">随机森林 VS 梯度提升机——模型融合之我见</a></p>
 <p>摘要：本文节选自Quora社区上“When would one use Random Forests over Gradient Boosted Machines (GBMs)?”问题的回答，几位博主就随机森林(Random Forests)与梯度提升机(Gradient Boosted Machines, GBMs)的适合场景以及优缺点展开了讨论。</p>
-<h2 id="三．机器学习常用库："><a href="#三．机器学习常用库：" class="headerlink" title="三．机器学习常用库："></a>三．机器学习常用库：</h2><p><a href="https://yq.aliyun.com/articles/69330?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">1.倚天遇到屠龙：LightGBM VS xgboost谁才是最强的梯度提升库？</a></p>
+<h2 id="三．机器学习常用库："><a href="#三．机器学习常用库：" class="headerlink" title="三．机器学习常用库："></a>三．机器学习常用库：</h2><p>1、<a href="https://yq.aliyun.com/articles/69330?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">倚天遇到屠龙：LightGBM VS xgboost谁才是最强的梯度提升库？</a></p>
 <p>摘要：很多人把XGBoost比作屠龙刀，LightGBM比作倚天剑，那么当倚天遇到屠龙，谁更强呢？</p>
-<p><a href="https://yq.aliyun.com/articles/81469?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">2.即学即用：Pandas入门与时间序列分析</a></p>
+<p>2、<a href="https://yq.aliyun.com/articles/81469?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">即学即用：Pandas入门与时间序列分析</a></p>
 <p>摘要：这篇文章是Alexander Hendorf 在PyData Florence 2017上做的报告。报告前半部分主要为初学者介绍Pandas的基本功能，如数据输入/输出、可视化、聚合与选择与访问，后半部分主要介绍如何使用Pandas进行时间序列分析，源代码亲测可用。</p>
-<p><a href="https://yq.aliyun.com/articles/136493?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">3.俄罗斯最大搜索引擎Yandex开源了一款梯度提升机器学习库CatBoost</a></p>
+<p>3、<a href="https://yq.aliyun.com/articles/136493?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">俄罗斯最大搜索引擎Yandex开源了一款梯度提升机器学习库CatBoost</a></p>
 <p>摘要：俄罗斯搜索巨头Yandex宣布，将向开源社区提交一款梯度提升机器学习库CatBoost。它能够在数据稀疏的情况下“教”机器学习。特别是在没有像视频、文本、图像这类感官型数据的时候，CatBoost也能根据事务型数据或历史数据进行操作。</p>
-<p><a href="https://yq.aliyun.com/articles/159746?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">4.Netflix开源面向稀疏数据优化的轻量级神经网络库Vectorflow</a></p>
+<p>4、<a href="https://yq.aliyun.com/articles/159746?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">Netflix开源面向稀疏数据优化的轻量级神经网络库Vectorflow</a></p>
 <p>摘要：在Netflix公司，我们的机器学习科学家在多个不同的领域处理着各种各样的问题：从根据你的爱好来定制电视和推荐电影，到优化编码算法。我们有一小部分问题涉及到处理极其稀疏的数据；手头问题的总维度数很容易就能达到数千万个特征，即使每次要看的可能只是少数的非零项。</p>
-<p><a href="https://yq.aliyun.com/articles/210393?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">5.Python高性能计算库——Numba</a></p>
+<p>5、<a href="https://yq.aliyun.com/articles/210393?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">Python高性能计算库——Numba</a></p>
 <p>摘要：在计算能力为王的时代，具有高性能计算的库正在被广泛大家应用于处理大数据。例如：Numpy，本文介绍了一个新的Python库——Numba， 在计算性能方面，它比Numpy表现的更好。</p>
-<p><a href="https://yq.aliyun.com/articles/68270?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">6.第二热门语言：从入门到精通，Python数据分析库大全</a></p>
-<p>摘要：本文介绍了一些常见的用于数据分析任务的Python库，如Numpy、Pandas、Matplotlib、Scikit-learn以及BeautifulSoup等，这些工具库功能强大，便于上手。有了这些帮助，数据分析会变得分外简单。</p>
-<p><a href="https://yq.aliyun.com/articles/158384?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">7.新工具——TensorLayer：管理深度学习项目的复杂性</a></p>
+<p>6、<a href="https://yq.aliyun.com/articles/68270?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">第二热门语言：从入门到精通，Python数据分析库大全</a><br>摘要：本文介绍了一些常见的用于数据分析任务的Python库，如Numpy、Pandas、Matplotlib、Scikit-learn以及BeautifulSoup等，这些工具库功能强大，便于上手。有了这些帮助，数据分析会变得分外简单。</p>
+<p>7、<a href="https://yq.aliyun.com/articles/158384?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">新工具——TensorLayer：管理深度学习项目的复杂性</a></p>
 <p>摘要：本文介绍了一种新基于TensorFlow的python库——TensorLayer，它能够有效的帮助开发者管理好自己的深度学习网络。并且它还提供了很多功能强悍的API，帮助开发者更好的完成任务。</p>
-<p><a href="https://yq.aliyun.com/articles/215295?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">8.Pandas并非完美无缺</a></p>
+<p>8、<a href="https://yq.aliyun.com/articles/215295?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">Pandas并非完美无缺</a></p>
 <p>摘要：我们一直使用Pandas，但是却不知道关于Pandas的细节。Pandas开发者深度复盘Pandas，指出了十大关键性问题，并通过介绍了如何使用Apache Arrow来解决这些问题。</p>
-<p><a href="https://yq.aliyun.com/articles/222523?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">9. 关于Numba你可能不了解的七个方面</a></p>
+<p>9、<a href="https://yq.aliyun.com/articles/222523?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">关于Numba你可能不了解的七个方面</a></p>
 <p>摘要：目前Numba正被开始流行使用来加速Python程序，本文讲解了七个大家可能不了解的方面，希望对大家有所帮助。</p>
 <h2 id="四．机器学习实战篇："><a href="#四．机器学习实战篇：" class="headerlink" title="四．机器学习实战篇："></a>四．机器学习实战篇：</h2><p>1.57行价值八千万美元的车牌识别代码</p>
 <p>摘要：为了防止被窃车辆进入黑市销售，警方使用了一个名为VicRoads的基于网络的服务，该服务用于检查车辆的登记状态。该警局还投资研发了一个固定式汽车牌照扫描器：一个固定的三脚架摄像头，可扫描过往的车辆，并自动识别被窃车辆。</p>
@@ -382,15 +355,13 @@
 <p>摘要：深度学习项目流程，带你走出迷茫。</p>
 <p>7.分布式机器学习平台比较</p>
 <p>摘要：机器学习，特别是深度学习（DL），最近已经在语音识别、图像识别、自然语言处理、推荐/搜索引擎等领域获得了成功。这些技术在自主驾驶汽车、数字卫生系统、CRM、广告、物联网等方面都存在着非常有前景的应用。当然，资金驱动着这些技术以极快的速度向前发展，而且，最近我们已经看到了有很多机器学习平台正在建立起来。</p>
-<p><a href="https://yq.aliyun.com/articles/187541?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">8.机器学习和统计学的“爱恨情仇”可以结束了</a></p>
+<p>8.<a href="https://yq.aliyun.com/articles/187541?spm=a2c4e.11153940.0.0.a9c92664Gi6jmF" target="_blank" rel="noopener">机器学习和统计学的“爱恨情仇”可以结束了</a></p>
 <p>摘要：机器学习和统计学在数据科学的领域里，已经相爱相杀很多年。今天，就让我们跟随ML从业者和统计学家两者组成团队，解开两者这几十年的“爱恨情仇”。</p>
 <p>9.2017上半年无监督特征学习研究成果汇总</p>
 <p>摘要：无监督学习是人工智能时代核心技术，今天我们就来盘点一下2017上半年无监督学习出现了那些重要的研究成果。</p>
 <p>10.有监督相似性学习：基于相似问题数据的对称关系学习</p>
 <p>摘要：本文简单介绍基于相似问题数据的对称关系学习，通过在Quora数据集和StackExchange语料库上应用孪生卷积神经网络的结果表明，对称网络能够较大幅度地提高检测精度。</p>
-<ol>
-<li>应用机器学习：传道解惑指南</li>
-</ol>
+<p><strong>11.应用机器学习：传道解惑指南</strong></p>
 <p>摘要：本文作者编辑了一份包括概念、定义、资源以及工具的知识合集，这对于在这个复杂领域从事工作的人来说非常有用。</p>
 <p><a href="https://yq.aliyun.com/articles/221644?utm_content=m_33134" target="_blank" rel="noopener">本文原址</a></p>
 ]]></content>

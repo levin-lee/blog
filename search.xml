@@ -72,6 +72,9 @@
 <p>8、json解析函数：get_json_object<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">get_json_object(string json_string, string path)</span><br></pre></td></tr></table></figure></p>
 <p>9、分隔字符串函数：split<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hive&gt; select split(&#39;abtcdtef&#39;,&#39;t&#39;) from lxw_dual;</span><br></pre></td></tr></table></figure><br>返回数组</p>
 ]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
       <tags>
         <tag>Hive</tag>
       </tags>
@@ -96,6 +99,9 @@
 <p>2）使用，分割<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN&#123;FS&#x3D;&quot;,&quot;&#125; &#123;print $1,$2&#125;&#39;  log.txt</span><br></pre></td></tr></table></figure></p>
 <p>3）条件语句<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">awk &#39;BEGIN &#123;</span><br><span class="line">    num &#x3D; 11; </span><br><span class="line">    if (num % 2 &#x3D;&#x3D; 0) printf &quot;%d 是偶数\n&quot;, num; </span><br><span class="line">    else printf &quot;%d 是奇数\n&quot;, num </span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
       <tags>
         <tag>linux</tag>
         <tag>shell</tag>
@@ -106,6 +112,9 @@
     <url>/2020/04/17/%E8%B0%88%E8%B0%88%E6%88%91%E7%9A%84%E5%8C%97%E6%BC%82/</url>
     <content><![CDATA[<p>一开始搞了github本来打算写点技术文章，现在更像是我的记事本，记录下我的感悟。</p>
 ]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
       <tags>
         <tag>感悟</tag>
         <tag>生活</tag>
@@ -141,6 +150,9 @@
 </ol>
 <p>参考目录：<br>【1】《统计学习方法》-李航<br>【2】《机器学习》-周志华</p>
 ]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
       <tags>
         <tag>机器学习</tag>
         <tag>LR</tag>
@@ -194,8 +206,8 @@
 </ul>
 ]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>编程</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -210,9 +222,12 @@
 <h1 id="4、map函数"><a href="#4、map函数" class="headerlink" title="4、map函数"></a>4、map函数</h1><p>map()函数接收两个参数，一个是函数，一个是序列，map将传入的函数依次作用到序列的每个元素，并把结果作为新的list返回。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line"><span class="meta">... </span><span class="keyword">return</span> x * x</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>map(f, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure></p>
 <h1 id="5、reduce函数"><a href="#5、reduce函数" class="headerlink" title="5、reduce函数"></a>5、reduce函数</h1><p>reduce这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算，其效果就是：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(x, y)</span>:</span></span><br><span class="line"><span class="meta">... </span><span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce(fn, [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>])</span><br><span class="line"><span class="number">13579</span></span><br></pre></td></tr></table></figure></p>
 ]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
       <tags>
-        <tag>编程</tag>
         <tag>python</tag>
+        <tag>编程</tag>
       </tags>
   </entry>
   <entry>
@@ -222,6 +237,9 @@
 <p>本书带给我的另一个感受是，人的一生会错过许许多多的人，有的人你会跟他相识相知，然后一别再也不见；有的人仅仅是打一个照面，就再也没有出现在你的世界中。每一天我们都在上演这离别戏码，可能是你身边的爱人和家人，也有可能是司机、路人、乘客。每次离别时，我们总以为还有机会再见，下次会有勇气把“我喜欢你”说给心底的那人听，但往往离别之后，再也无法遇见，未说出口的表白成为永久的遗憾。</p>
 <p>一别之后，两地相悬，怎知说那三四载，谁知是一生憾事。</p>
 ]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
       <tags>
         <tag>感悟</tag>
         <tag>杂文</tag>
@@ -232,6 +250,9 @@
     <url>/2020/03/21/%E9%AB%98%E6%80%A7%E8%83%BDMySQL/</url>
     <content><![CDATA[<p>浅谈高性能MySQL</p>
 ]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
       <tags>
         <tag>MySQL</tag>
       </tags>
@@ -248,6 +269,9 @@
 <h2 id="4、付诸实践，不断试错"><a href="#4、付诸实践，不断试错" class="headerlink" title="4、付诸实践，不断试错"></a>4、付诸实践，不断试错</h2><p>有人说，“年轻人要用于去尝试，不要害怕出错；到老了，犯错误的成本就会很高”。这句话是很有道理的，尤其是在投资界。年轻时，你的资本比较小，亏损了大不了，你还可以重新来过，你还年轻，还有大把的时间可以奋斗，但是当你老了，你已经没有能力或者精力去靠工作赚钱，这时候投资发生损失对于老年生活质量会大大打个折扣。所以，趁年轻，不断去试错，从失败中汲起教训，要么早点认清自己不适合投资，将时间放在更有价值、更合适的地方；要么坚持下去，不断修正自己的投资，完善投资框架，体验投资给你带来的财富增值。</p>
 <p>附我的股票投资逻辑图：<br><img src="/2020/03/15/%E6%8A%95%E8%B5%84/invest.jpg" alt="逻辑图"></p>
 ]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
       <tags>
         <tag>股市</tag>
         <tag>想法</tag>
@@ -262,6 +286,9 @@
 <p>虽然中国的疫情基本上整体得到控制，但是由于中国市场与全球经济的联动越发密切，A股不可避免地随全球指数暴跌。笔者的账户从原先20%的盈利大幅回撤到5%，或许可能把盈利给抹平。但是，我想说要做坚定的价值投资者。巴菲特曾说过，要在别人贪婪的时候恐惧，恐惧的时候贪婪。前半部分，我自问没有做到，在前段时间A股技术型牛市时候，忽视国外疫情的发展，没有意识到风险，因此现在能做的只有后者。上证指数在3000点附近徘徊，有可能会继续下跌，但整体风险已经减弱，等到国外疫情稳定下来，就是A股突破的日子。</p>
 <p>为什么要做坚定的价值投资者呢，纵观A股历史，只有白马股才能穿越牛熊。我们需要做只有不断丰富自己的知识、提高自己的投资水平，发现被低谷的白马股。</p>
 ]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
       <tags>
         <tag>股市</tag>
       </tags>
@@ -404,6 +431,9 @@
 <p>摘要：本文作者编辑了一份包括概念、定义、资源以及工具的知识合集，这对于在这个复杂领域从事工作的人来说非常有用。</p>
 <p><a href="https://yq.aliyun.com/articles/221644?utm_content=m_33134" target="_blank" rel="noopener">本文原址</a></p>
 ]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
       <tags>
         <tag>机器学习</tag>
         <tag>转发</tag>
